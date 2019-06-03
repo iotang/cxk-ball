@@ -173,7 +173,7 @@ class Score {
 	computeScore() {
 		let num = 0
 		let allNum = this.blockListLen
-		this.score = Math.ceil(Math.pow(window.cacheBallSpeed, 3) / 3.00)
+		this.score = Math.ceil(Math.pow(window.cacheBallSpeed, 3))
 		num = this.blockListLen - this.blockList.length
 		this.allScore = this.score * num - this.scorepunishment
 	}

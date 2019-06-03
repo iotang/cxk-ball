@@ -43,14 +43,16 @@ class Skill {
 		});
 		// TODO 通过canvas将技能名称、图标、描述、快捷键等显示出来
 		const keyName = typeof this.keyCode === 'number' ? String.fromCharCode(this.keyCode) : this.keyCode.map(key => String.fromCharCode(key)).join('/');
-		console.log(`CXK 已加载技能：${keyName}-${this.name}`);
+
+		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
+		console.log(`CXK 已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${delta}`);
 	}
 
 	/**
 	 * 释放技能
 	 */
 	cast() {
-		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed,2.5));
+		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
 		if (this.lastCastTime + this.cd * 1000 > Date.now()) {
 			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - Date.now()) / 1000.00;
 			distan = distan.toFixed(2);
@@ -72,7 +74,7 @@ class SkillQ extends Skill {
 			'意念控球',
 			'',
 			'CXK 使用意念控制球转向一次，朝向离球最近的一个砖块',
-			5,
+			3,
 			4,
 			'Q');
 	}
@@ -107,6 +109,9 @@ class SkillQ extends Skill {
 		const expectTime = Math.sqrt(targetDistance / speed);
 		ball.speedX = (ball.x - targetBlock.x) / expectTime;
 		ball.speedY = (ball.y - targetBlock.y) / expectTime;
+		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
+		ball.speedX = ball.speedX * per;
+		ball.speedY = ball.speedY * per;
 	}
 }
 
