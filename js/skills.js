@@ -52,6 +52,9 @@ class Skill {
 	 * 释放技能
 	 */
 	cast() {
+		if (this.lastCastTime + 500 > Date.now()) {
+			return -1;
+		}
 		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
 		if (this.lastCastTime + this.cd * 1000 > Date.now()) {
 			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - Date.now()) / 1000.00;
@@ -60,11 +63,14 @@ class Skill {
 		} else if (this.main.score.allScore < delta) {
 			throw new Error(`积分不足 (${this.main.score.allScore} / ${delta})`);
 		}
+		
 		this.lastCastTime = Date.now(); // 更新上次释放时间
 		this.main.score.scorepunishment += delta;  // 扣除积分
 		this.main.score.computeScore()
 		// TODO 显示释放技能的特效
-		console.log(`CXK 消耗了 ${delta} 积分发动了技能——${this.name}！\n${this.desc}`)
+		console.log(`在 ${this.lastCastTime}的${Date.now()}，CXK 消耗了 ${delta} 积分发动了技能——${this.name}！\n${this.desc}`)
+
+		return 0;
 	}
 }
 
@@ -89,7 +95,9 @@ class SkillQ extends Skill {
 	}
 
 	cast() {
-		super.cast();
+		if(super.cast() != 0){
+			return;
+		};
 		const { blockList, ball } = this.main;
 		console.log(blockList)
 		let targetBlock = null;
@@ -128,7 +136,9 @@ class SkillW extends Skill {
 	}
 
 	cast() {
-		super.cast();
+		if(super.cast() != 0){
+			return;
+		};
 		const { paddle, ball } = this.main;
 		this.casting = setInterval(() => {
 			paddle.x = ball.x - paddle.w / 2;
