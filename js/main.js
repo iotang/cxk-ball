@@ -36,8 +36,8 @@ let _main = {
 		 */
 		self.ball = new Ball(self)
 		/**
-			 * 小球阴影
-			 */
+		 * 小球阴影
+		 */
 		self.ballshadow = new BallShadow(self)
 		/**
 		 * 挡板

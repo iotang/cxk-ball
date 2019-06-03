@@ -158,8 +158,8 @@ class Score {
 		let s = {
 			x: _main.score_x,                               // x轴坐标
 			y: _main.score_y,                               // y轴坐标
-			text: '分数：',                                  // 文本分数
-			textLv: '关卡：',                                // 关卡文本
+			text: '分数 ',                                  // 文本分数
+			textLv: '关卡 ',                                // 关卡文本
 			score: 1,                                       // 每个砖块对应分数
 			allScore: 0,                                    // 总分
 			scorepunishment: 0,                             // 分数惩罚
@@ -217,36 +217,7 @@ class Scene {
 
 		switch (lv) {
 
-			case 1: // 隔层
-				var xNum = 18,                               // x轴砖块第一层数量
-					yNum = 12                                 // y轴砖块层数
-				// 循环y轴
-				for (let i = 0; i < yNum; i++) {
-					let arr = []
-					// 修改每层x轴砖块数量
-					x_start = (xNum_max - xNum) / 2 * 50            // 修改每层x轴砖块起始坐标
-					// 循环x轴
-					if (i % 2 == 0 || i < 3) {
-						for (let k = 0; k < xNum; k++) {
-							if (i < 3) { // 前三排为特殊砖块
-								arr.push({
-									x: x_start + k * 50,
-									y: y_start + i * 20,
-									type: 2,
-								})
-							} else {
-								arr.push({
-									x: x_start + k * 50,
-									y: y_start + i * 20,
-									type: 1,
-								})
-							}
-						}
-					}
-					this.blockList.push(arr)
-				}
-				break
-			case 4: // 正三角形
+			case 1: // 正三角形
 				var xNum = 16,                               // x轴砖块第一层数量
 					yNum = 9                                 // y轴砖块层数
 				// 循环y轴
@@ -343,6 +314,35 @@ class Scene {
 								y: y_start + i * 20,
 								type: 1,
 							})
+						}
+					}
+					this.blockList.push(arr)
+				}
+				break
+			case 4: // 隔层
+				var xNum = 18,                               // x轴砖块第一层数量
+					yNum = 12                                 // y轴砖块层数
+				// 循环y轴
+				for (let i = 0; i < yNum; i++) {
+					let arr = []
+					// 修改每层x轴砖块数量
+					x_start = (xNum_max - xNum) / 2 * 50            // 修改每层x轴砖块起始坐标
+					// 循环x轴
+					if (i % 2 == 0 || i < 3) {
+						for (let k = 0; k < xNum; k++) {
+							if (i < 3) { // 前三排为特殊砖块
+								arr.push({
+									x: x_start + k * 50,
+									y: y_start + i * 20,
+									type: 2,
+								})
+							} else {
+								arr.push({
+									x: x_start + k * 50,
+									y: y_start + i * 20,
+									type: 1,
+								})
+							}
 						}
 					}
 					this.blockList.push(arr)

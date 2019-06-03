@@ -21,7 +21,7 @@ class Skill {
 		} else if (typeof keyCode === 'string' && keyCode.length === 1) {
 			this.keyCode = keyCode.toUpperCase().charCodeAt(0);
 		} else {
-			throw new Error(`技能${name}无法绑定按键${keyCode}`);
+			throw new Error(`技能 ${name} 无法绑定按键 "${keyCode}"`);
 		}
 		this.lastCastTime = 0; // Date.now();
 
@@ -43,24 +43,26 @@ class Skill {
 		});
 		// TODO 通过canvas将技能名称、图标、描述、快捷键等显示出来
 		const keyName = typeof this.keyCode === 'number' ? String.fromCharCode(this.keyCode) : this.keyCode.map(key => String.fromCharCode(key)).join('/');
-		console.log(`cxk已加载技能：${keyName}-${this.name}`);
+		console.log(`CXK 已加载技能：${keyName}-${this.name}`);
 	}
 
 	/**
 	 * 释放技能
 	 */
 	cast() {
-		let delta = this.cost * Math.ceil(Math.pow(window.cacheBallSpeed,2.5));
+		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed,2.5));
 		if (this.lastCastTime + this.cd * 1000 > Date.now()) {
-			throw new Error('技能尚未冷却');
-		} else if (this.main.score.allScore - this.main.score.scorepunishment < delta) {
-			throw new Error(`积分不足 (${this.main.score.allScore - this.main.score.scorepunishment} / ${delta})`);
+			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - Date.now()) / 1000.00;
+			distan = distan.toFixed(2);
+			throw new Error(`技能尚未冷却 (${distan} / ${this.cd})`);
+		} else if (this.main.score.allScore < delta) {
+			throw new Error(`积分不足 (${this.main.score.allScore} / ${delta})`);
 		}
 		this.lastCastTime = Date.now(); // 更新上次释放时间
 		this.main.score.scorepunishment += delta;  // 扣除积分
 		this.main.score.computeScore()
 		// TODO 显示释放技能的特效
-		console.log(`cxk消耗了 ${delta} 积分发动了技能——${this.name}！\n${this.desc}`)
+		console.log(`CXK 消耗了 ${delta} 积分发动了技能——${this.name}！\n${this.desc}`)
 	}
 }
 
@@ -69,9 +71,9 @@ class SkillQ extends Skill {
 		super(main,
 			'意念控球',
 			'',
-			'cxk使用意念控制球转向一次，直接命中最近的一个砖块',
-			10,
-			7,
+			'CXK 使用意念控制球转向一次，朝向离球最近的一个砖块',
+			5,
+			4,
 			'Q');
 	}
 
@@ -113,9 +115,9 @@ class SkillW extends Skill {
 		super(main,
 			'虚鲲鬼步',
 			'',
-			'cxk发动在美国校队时领悟的绝技，5秒内可以100%接住篮球',
-			20,
-			10,
+			'CXK 发动在美国校队时领悟的绝技，5 秒内可以无视移动速度限制，100% 接住篮球',
+			15,
+			15,
 			'W');
 		this.duration = 5;  // 持续5秒
 	}
