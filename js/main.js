@@ -4,7 +4,7 @@
 // 游戏主函数
 let _main = {
 	LV: 1,                               // 初始关卡
-	MAXLV: 3,                            // 最终关卡
+	MAXLV: 4,                            // 最终关卡
 	scene: null,                         // 场景对象
 	blockList: null,                     // 所有砖块对象集合
 	ball: null,                          // 小球对象
@@ -22,6 +22,7 @@ let _main = {
 
 	skillq: null,                        // q技能
 	skillw: null,                        // w技能
+	skille: null,                        // e技能
 
 	start: function () {                 // 游戏启动函数
 		let self = this
@@ -52,8 +53,12 @@ let _main = {
 		 */
 		self.game = new Game(self)
 
-		self.skillq = new SkillQ(self);
-		self.skillw = new SkillW(self);
+		if (self.skillq == null) self.skillq = new SkillQ(self);
+		else self.skillq.refresh();
+		if (self.skillw == null) self.skillw = new SkillW(self);
+		else self.skillw.refresh();
+		if (self.skille == null) self.skille = new SkillE(self);
+		else self.skille.refresh();
 		/**
 		 * 游戏初始化
 		 */

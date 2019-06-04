@@ -24,10 +24,12 @@ class Skill {
 			throw new Error(`技能 ${name} 无法绑定按键 "${keyCode}"`);
 		}
 		this.lastCastTime = 0; // Date.now();
-		this.isRunning = 0;
-		this.faded = 0;
 
 		this.bindKey();
+	}
+
+	refresh() {
+		this.lastCastTime = 0; // Date.now();
 	}
 
 	bindKey() {
@@ -49,24 +51,14 @@ class Skill {
 		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
 		console.log(`CXK 已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${delta}`);
 		this.lastCastTime = 0;
-		this.isRunning = 0;
-		this.faded = 0;
 	}
 
 	/**
 	 * 释放技能
 	 */
 	cast() {
-		if (this.isRunning != 0) {
-			return -1;
-		}
-
-		let thisnum = this.faded + 1;
-		this.faded++;
-		this.isRunning = thisnum;
-
 		let nowtime = Date.now();
-		
+
 		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
 		if (this.lastCastTime + this.cd * 1000 > nowtime) {
 			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - nowtime) / 1000.00;
@@ -78,23 +70,14 @@ class Skill {
 			this.isRunning = 0;
 			throw new Error(`积分不足 (${this.main.score.allScore} / ${delta})`);
 		}
-		
-		if (this.isRunning != 0 && this.isRunning != thisnum) {
-			return -1;
-		}
-		this.isRunning = thisnum;
-		console.log(`${this.lastCastTime}`);
+
 		this.lastCastTime = nowtime; // 更新上次释放时间
 		this.main.score.scorepunishment += delta;  // 扣除积分
 		this.main.score.computeScore();
 		// TODO 显示释放技能的特效
-		console.log(`${this.lastCastTime}, ${nowtime}`);
-		
+
 		console.log(`CXK 消耗了 ${delta} 积分发动了技能 ${this.name}！\n${this.desc}`);
-		
-		setTimeout(() => {
-			this.isRunning = 0;
-		}, 250);
+
 		return 0;
 	}
 }
@@ -120,7 +103,7 @@ class SkillQ extends Skill {
 	}
 
 	cast() {
-		if(super.cast() != 0){
+		if (super.cast() != 0) {
 			return;
 		};
 		const { blockList, ball } = this.main;
@@ -140,8 +123,8 @@ class SkillQ extends Skill {
 		// 使用意念控制球转向
 		const speed = Math.pow(ball.speedX, 2) + Math.pow(ball.speedY, 2);
 		const expectTime = Math.sqrt(targetDistance / speed);
-		ball.speedX = (ball.x - targetBlock.x) / (expectTime + 0.05);
-		ball.speedY = (ball.y - targetBlock.y) / (expectTime + 0.05);
+		ball.speedX = (ball.x - targetBlock.x) / expectTime;
+		ball.speedY = (ball.y - targetBlock.y) / expectTime + 0.05;
 		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
 		ball.speedX = ball.speedX * per;
 		ball.speedY = ball.speedY * per;
@@ -161,7 +144,7 @@ class SkillW extends Skill {
 	}
 
 	cast() {
-		if(super.cast() != 0){
+		if (super.cast() != 0) {
 			return;
 		};
 		const { paddle, ball } = this.main;
@@ -171,5 +154,34 @@ class SkillW extends Skill {
 		setTimeout(() => {
 			clearInterval(this.casting);
 		}, this.duration * 1000);
+	}
+}
+
+class SkillE extends Skill {
+	constructor(main) {
+		super(main,
+			'闪烁之鲲',
+			'',
+			'CXK 利用自己长期跳舞的经验，向当前方向闪烁一小段距离',
+			0.3,
+			2,
+			'E');
+		this.duration = 5;  // 持续5秒
+	}
+
+	cast() {
+		if (super.cast() != 0) {
+			return;
+		};
+		const { paddle } = this.main;
+
+		let transdis = 120;
+
+		if (move_way == 2) {
+			paddle.x = Math.max(0, paddle.x - transdis);
+		}
+		if (move_way == 1) {
+			paddle.x = Math.min(paddle.x + transdis, canvas.width - 70);
+		};
 	}
 }

@@ -26,7 +26,7 @@ class Game {
 		Object.assign(this, g)
 	}
 	// 绘制页面所有素材
-	draw(paddle, ball, ballshadow, blockList, score, skillq, skillw) {
+	draw(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille) {
 		let g = this
 		// 清除画布
 		g.context.clearRect(0, 0, g.canvas.width, g.canvas.height)
@@ -42,8 +42,9 @@ class Game {
 		g.drawBlocks(blockList)
 		// 绘制分数
 		g.drawText(score)
-		g.drawSkills(skillq,0)
-		g.drawSkills(skillw,1)
+		g.drawSkills(skillq, 0)
+		g.drawSkills(skillw, 1)
+		g.drawSkills(skille, 2)
 
 		window.canvas_g = this
 	}
@@ -73,7 +74,7 @@ class Game {
 		this.context.fillStyle = '#000'
 		this.context.fillText(obj.allScore, this.canvas.width - 48 - Math.floor(Math.log10(Math.max(1, obj.allScore))) * 42, this.canvas.height - 10)
 
-		
+
 		this.context.font = 'bold 24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
 		//this.context.fillText(obj.text + obj.allScore, obj.x, obj.y)
@@ -81,20 +82,24 @@ class Game {
 		this.context.fillText(obj.textLv + obj.lv, obj.x, obj.y)
 		storageScore = obj.allScore;
 	}
-	drawSkills(obj,num) {
-		this.context.font = 'bold 48px Microsoft YaHei'
-		this.context.fillStyle = '#000'
-		this.context.fillText(String.fromCharCode(obj.keyCode), num * 256, 600)
+	drawSkills(obj, num) {
+		let nowtime = Date.now();
+		let distan = ((obj.lastCastTime + obj.cd * 1000) - nowtime) / 1000.00;
+		distan = Math.max(0.0, distan.toFixed(1));
+		let delta = Math.ceil(obj.cost * Math.pow(window.cacheBallSpeed, 2.8));
 
+		let isCDOK = (distan <= 0);
+		let isScoreOK = (obj.main.score.allScore >= delta);
+
+		if (isCDOK && isScoreOK) this.context.fillStyle = '#000';
+		else this.context.fillStyle = '#999';
+
+		this.context.font = 'bold 48px Microsoft YaHei'
+		this.context.fillText(String.fromCharCode(obj.keyCode), num * 256, 600)
 		this.context.font = '24px Microsoft YaHei'
-		this.context.fillStyle = '#000'
 		this.context.fillText(obj.name, num * 256 + 48, 600)
 
-		let nowtime = Date.now();
-		let delta = Math.ceil(obj.cost * Math.pow(window.cacheBallSpeed, 2.8));
-		if (obj.lastCastTime + obj.cd * 1000 > nowtime) {
-			let distan = ((obj.lastCastTime + obj.cd * 1000) - nowtime) / 1000.00;
-			distan = distan.toFixed(2);
+		if (!isCDOK) {
 			this.context.font = '24px Microsoft YaHei'
 			this.context.fillStyle = '#a00'
 			this.context.fillText("CD " + distan + "s", num * 256, 600 + 24 * 1.25)
@@ -107,13 +112,13 @@ class Game {
 			this.context.fillStyle = '#000'
 			this.context.fillText("(" + obj.cd + ")", num * 256 + 80, 600 + 24 * 1.25)
 		}
-		if (obj.main.score.allScore < delta) {
-			this.context.font = '24px Microsoft YaHei'
+		if (!isScoreOK) {
+			this.context.font = 'bold 24px Microsoft YaHei'
 			this.context.fillStyle = '#a00'
 			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
 		}
 		else {
-			this.context.font = 'bold 24px Microsoft YaHei'
+			this.context.font = '24px Microsoft YaHei'
 			this.context.fillStyle = '#00a'
 			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
 		}
@@ -233,7 +238,7 @@ class Game {
 		b.move(g)
 	}
 	// 设置逐帧动画
-	setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw) {
+	setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille) {
 		let g = this
 		let main = g.main
 		g.timer = setInterval(function () {
@@ -268,10 +273,10 @@ class Game {
 			if (g.state === g.state_RUNNING) {
 				g.checkBallBlock(g, paddle, ball, blockList, score)
 				// 绘制游戏所有素材
-				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw)
+				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille)
 			} else if (g.state === g.state_START) {
 				// 绘制游戏所有素材
-				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw)
+				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille)
 			}
 		}, 1000 / g.fps)
 	}
@@ -286,8 +291,9 @@ class Game {
 			blockList = g.main.blockList,
 			score = g.main.score,
 			skillq = g.main.skillq,
-			skillw = g.main.skillw
-			// 设置键盘按下及松开相关注册函数
+			skillw = g.main.skillw,
+			skille = g.main.skille
+		// 设置键盘按下及松开相关注册函数
 		window.addEventListener('keydown', function (event) {
 			if (event.keyCode == 65) {
 				g.keydowns[37] = true;
@@ -467,6 +473,6 @@ class Game {
 			}
 		})
 		// 设置轮询定时器
-		g.setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw)
+		g.setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille)
 	}
 }
