@@ -8,11 +8,13 @@ Finally, If you like this game, please give me a star, thanks!
 
 ## Game Screenshots
 
-![](https://i.imgur.com/gVfLn4a.png)
+![](https://s2.ax1x.com/2019/06/04/Vtzjuq.png)
 
 The game has several levels to choose from (easy, normal, difficult, super hard and more harder difficulties)
 
 The mode which speed>=8, Please ikun's don't try it lightly, Otherwise it might go crazy. (XD
+
+![](https://s2.ax1x.com/2019/06/04/VN9bCD.gif)
 
 Wish you have a good game!
 

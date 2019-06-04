@@ -14,13 +14,13 @@
 
 ## 游戏截图
 
-![](https://i.imgur.com/gVfLn4a.png)
+![](https://s2.ax1x.com/2019/06/04/Vtzjuq.png)
 
 游戏有更多种难度可选择（简单、普通、困难、极限以及更多）
 
 速度大于等于 8 的难度请勿轻易尝试，否则可能会疯掉（雾
 
-![](https://upload-images.jianshu.io/upload_images/3203841-f8468944b6321119.gif?imageMogr2/auto-orient/strip)
+![](https://s2.ax1x.com/2019/06/04/VN9bCD.gif)
 
 祝您游戏愉快
 
