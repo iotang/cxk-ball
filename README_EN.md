@@ -12,13 +12,13 @@ Finally, If you like this game, please give me a star, thanks!
 
 The game has several levels to choose from (easy, normal, difficult, super hard and more harder difficulties)
 
-The mode which speed $\geq 8$, Please ikun's don't try it lightly, Otherwise it might go crazy. (XD
+The mode which speed>=8, Please ikun's don't try it lightly, Otherwise it might go crazy. (XD
 
 Wish you have a good game!
 
 ## How to experience
 
-You can play the demo or git clone this project to local
+You can git clone this project to local
 
 Original Project:
 

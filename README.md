@@ -18,7 +18,7 @@
 
 游戏有更多种难度可选择（简单、普通、困难、极限以及更多）
 
-速度 $\geq 8$ 的难度请勿轻易尝试，否则可能会疯掉（雾
+速度大于等于 8 的难度请勿轻易尝试，否则可能会疯掉（雾
 
 ![](https://upload-images.jianshu.io/upload_images/3203841-f8468944b6321119.gif?imageMogr2/auto-orient/strip)
 
@@ -26,7 +26,7 @@
 
 ## 如何体验
 
-你可以直接玩 demo 或者自行 clone 到本地
+你可以直接 clone 到本地
 
 原项目：
 

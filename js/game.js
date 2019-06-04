@@ -26,7 +26,7 @@ class Game {
 		Object.assign(this, g)
 	}
 	// 绘制页面所有素材
-	draw(paddle, ball, ballshadow, blockList, score) {
+	draw(paddle, ball, ballshadow, blockList, score, skillq, skillw) {
 		let g = this
 		// 清除画布
 		g.context.clearRect(0, 0, g.canvas.width, g.canvas.height)
@@ -42,6 +42,9 @@ class Game {
 		g.drawBlocks(blockList)
 		// 绘制分数
 		g.drawText(score)
+		g.drawSkills(skillq,0)
+		g.drawSkills(skillw,1)
+
 		window.canvas_g = this
 	}
 	// 绘制图片
@@ -64,10 +67,57 @@ class Game {
 		this.context.font = '24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
 		// 绘制分数
-		this.context.fillText(obj.text + obj.allScore, obj.x, obj.y)
+		this.context.fillText(obj.text, this.canvas.width - 24 * 2, this.canvas.height - 10 - 72)
+
+		this.context.font = 'bold 72px Microsoft YaHei'
+		this.context.fillStyle = '#000'
+		this.context.fillText(obj.allScore, this.canvas.width - 48 - Math.floor(Math.log10(Math.max(1, obj.allScore))) * 42, this.canvas.height - 10)
+
+		
+		this.context.font = 'bold 24px Microsoft YaHei'
+		this.context.fillStyle = '#000'
+		//this.context.fillText(obj.text + obj.allScore, obj.x, obj.y)
 		// 绘制关卡
-		this.context.fillText(obj.textLv + obj.lv, this.canvas.width - 100, obj.y)
+		this.context.fillText(obj.textLv + obj.lv, obj.x, obj.y)
 		storageScore = obj.allScore;
+	}
+	drawSkills(obj,num) {
+		this.context.font = 'bold 48px Microsoft YaHei'
+		this.context.fillStyle = '#000'
+		this.context.fillText(String.fromCharCode(obj.keyCode), num * 256, 600)
+
+		this.context.font = '24px Microsoft YaHei'
+		this.context.fillStyle = '#000'
+		this.context.fillText(obj.name, num * 256 + 48, 600)
+
+		let nowtime = Date.now();
+		let delta = Math.ceil(obj.cost * Math.pow(window.cacheBallSpeed, 2.8));
+		if (obj.lastCastTime + obj.cd * 1000 > nowtime) {
+			let distan = ((obj.lastCastTime + obj.cd * 1000) - nowtime) / 1000.00;
+			distan = distan.toFixed(2);
+			this.context.font = '24px Microsoft YaHei'
+			this.context.fillStyle = '#a00'
+			this.context.fillText("CD " + distan + "s", num * 256, 600 + 24 * 1.25)
+		}
+		else {
+			this.context.font = 'bold 24px Microsoft YaHei'
+			this.context.fillStyle = '#0a0'
+			this.context.fillText("Ready", num * 256, 600 + 24 * 1.25)
+			this.context.font = '18px Microsoft YaHei'
+			this.context.fillStyle = '#000'
+			this.context.fillText("(" + obj.cd + ")", num * 256 + 80, 600 + 24 * 1.25)
+		}
+		if (obj.main.score.allScore < delta) {
+			this.context.font = '24px Microsoft YaHei'
+			this.context.fillStyle = '#a00'
+			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
+		}
+		else {
+			this.context.font = 'bold 24px Microsoft YaHei'
+			this.context.fillStyle = '#00a'
+			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
+		}
+
 	}
 	// 游戏结束
 	gameOver() {
@@ -81,7 +131,10 @@ class Game {
 		// 绘制提示文字
 		this.context.font = '32px Microsoft YaHei'
 		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，你球掉了！得分：' + globalScore, 404, 226)
+		this.context.fillText('CXK，你球掉了！', 445, 226);
+		this.context.fillText('得分 ', 445, 226 + 32 * 1.5)
+		this.context.font = 'bold 36px Microsoft YaHei'
+		this.context.fillText(globalScore, 445 + 70, 226 + 32 * 1.5 + 2)
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
 		globalScore = 0;
@@ -98,7 +151,7 @@ class Game {
 		// 绘制提示文字
 		this.context.font = '32px Microsoft YaHei'
 		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，下一关！', 308, 226)
+		this.context.fillText('CXK，下一关！', 445, 226)
 		// audio.pause();
 	}
 	// 游戏通关
@@ -111,9 +164,13 @@ class Game {
 		// 绘制背景图
 		//this.drawBg()
 		// 绘制提示文字
-		this.context.font = '32px Microsoft YaHei'
+		this.context.font = 'bold 32px Microsoft YaHei'
 		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，通关！总分：' + globalScore, 308, 226)
+		this.context.fillText('CXK，通关！', 445, 226);
+		this.context.fillText('总分 ', 445, 226 + 32 * 1.5)
+		this.context.font = 'bold 36px Microsoft YaHei'
+		this.context.fillStyle = '#00f'
+		this.context.fillText(globalScore, 445 + 70, 226 + 32 * 1.5 + 2)
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
 		globalScore = 0;
@@ -176,7 +233,7 @@ class Game {
 		b.move(g)
 	}
 	// 设置逐帧动画
-	setTimer(paddle, ball, ballshadow, blockList, score) {
+	setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw) {
 		let g = this
 		let main = g.main
 		g.timer = setInterval(function () {
@@ -211,10 +268,10 @@ class Game {
 			if (g.state === g.state_RUNNING) {
 				g.checkBallBlock(g, paddle, ball, blockList, score)
 				// 绘制游戏所有素材
-				g.draw(paddle, ball, ballshadow, blockList, score)
+				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw)
 			} else if (g.state === g.state_START) {
 				// 绘制游戏所有素材
-				g.draw(paddle, ball, ballshadow, blockList, score)
+				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw)
 			}
 		}, 1000 / g.fps)
 	}
@@ -227,8 +284,10 @@ class Game {
 			ball = g.main.ball,
 			ballshadow = g.main.ballshadow,
 			blockList = g.main.blockList,
-			score = g.main.score
-		// 设置键盘按下及松开相关注册函数
+			score = g.main.score,
+			skillq = g.main.skillq,
+			skillw = g.main.skillw
+			// 设置键盘按下及松开相关注册函数
 		window.addEventListener('keydown', function (event) {
 			if (event.keyCode == 65) {
 				g.keydowns[37] = true;
@@ -408,6 +467,6 @@ class Game {
 			}
 		})
 		// 设置轮询定时器
-		g.setTimer(paddle, ball, ballshadow, blockList, score)
+		g.setTimer(paddle, ball, ballshadow, blockList, score, skillq, skillw)
 	}
 }
