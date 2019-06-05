@@ -95,32 +95,32 @@ class Game {
 		else this.context.fillStyle = '#999';
 
 		this.context.font = 'bold 48px Microsoft YaHei'
-		this.context.fillText(String.fromCharCode(obj.keyCode), num * 256, 600)
+		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216, 600)
 		this.context.font = '24px Microsoft YaHei'
-		this.context.fillText(obj.name, num * 256 + 48, 600)
+		this.context.fillText(obj.name, num * 216 + 48, 600)
 
 		if (!isCDOK) {
 			this.context.font = '24px Microsoft YaHei'
 			this.context.fillStyle = '#a00'
-			this.context.fillText("CD " + distan + "s", num * 256, 600 + 24 * 1.25)
+			this.context.fillText("CD " + distan + "s", num * 216, 600 + 24 * 1.25)
 		}
 		else {
 			this.context.font = 'bold 24px Microsoft YaHei'
 			this.context.fillStyle = '#0a0'
-			this.context.fillText("Ready", num * 256, 600 + 24 * 1.25)
+			this.context.fillText("Ready", num * 216, 600 + 24 * 1.25)
 			this.context.font = '18px Microsoft YaHei'
 			this.context.fillStyle = '#000'
-			this.context.fillText("(" + obj.cd + ")", num * 256 + 80, 600 + 24 * 1.25)
+			this.context.fillText("(" + obj.cd + ")", num * 216 + 80, 600 + 24 * 1.25)
 		}
 		if (!isScoreOK) {
 			this.context.font = 'bold 24px Microsoft YaHei'
 			this.context.fillStyle = '#a00'
-			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
+			this.context.fillText(delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 		else {
 			this.context.font = '24px Microsoft YaHei'
 			this.context.fillStyle = '#00a'
-			this.context.fillText(delta, num * 256 + 128, 600 + 24 * 1.25)
+			this.context.fillText(delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 
 	}
