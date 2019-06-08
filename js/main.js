@@ -47,7 +47,7 @@ let _main = {
 		/**
 		 * 计分板
 		 */
-		if (self.score == null)self.score = new Score(self);
+		if (self.score == null) self.score = new Score(self);
 		else self.score.refresh();
 		/**
 		 * 游戏主要逻辑

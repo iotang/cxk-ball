@@ -66,8 +66,8 @@ class Game {
 	// 绘制计数板
 	drawText(obj) {
 
-		this.context.textAlign="end"
-		
+		this.context.textAlign = "end"
+
 		this.context.font = '24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
 		// 绘制分数
@@ -79,37 +79,35 @@ class Game {
 
 		let isReachedHighScore = (obj.grandHighestScore <= globalScore + obj.allScore);
 
-		if(isReachedHighScore) this.context.fillStyle = '#090';
+		if (isReachedHighScore) this.context.fillStyle = '#090';
 		else this.context.fillStyle = '#666';
 		this.context.font = 'italic 18px Microsoft YaHei'
 		this.context.fillText("累计", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36)
 		this.context.font = 'italic bold 24px Microsoft YaHei'
 		this.context.fillText(globalScore + obj.allScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36)
 
-		if(isReachedHighScore) this.context.fillStyle = '#090';
+		if (isReachedHighScore) this.context.fillStyle = '#090';
 		else this.context.fillStyle = '#009';
 		this.context.font = 'italic 18px Microsoft YaHei'
 		this.context.fillText("最高", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36 - 24)
 		this.context.font = 'italic bold 24px Microsoft YaHei'
 		this.context.fillText(obj.grandHighestScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36 - 24)
 
-		this.context.textAlign="start"
+		this.context.textAlign = "start"
 
 		this.context.font = 'bold 24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
-		//this.context.fillText(obj.text + obj.allScore, obj.x, obj.y)
-		// 绘制关卡
 		this.context.fillText(obj.textLv + obj.lv, obj.x, obj.y)
+
 		storageScore = obj.allScore;
 	}
 	drawSkills(obj, num) {
 		let nowtime = Date.now();
 		let distan = ((obj.lastCastTime + obj.cd * 1000) - nowtime) / 1000.00;
 		distan = Math.max(0.0, distan.toFixed(1));
-		let delta = Math.ceil(obj.cost * Math.pow(window.cacheBallSpeed, 2.8));
 
 		let isCDOK = (distan <= 0);
-		let isScoreOK = (obj.main.score.allScore >= delta);
+		let isScoreOK = (obj.main.score.allScore >= obj.delta);
 
 		if (isCDOK && isScoreOK) this.context.fillStyle = '#000';
 		else this.context.fillStyle = '#999';
@@ -135,12 +133,12 @@ class Game {
 		if (!isScoreOK) {
 			this.context.font = 'bold 24px Microsoft YaHei'
 			this.context.fillStyle = '#a00'
-			this.context.fillText(delta, num * 216 + 128, 600 + 24 * 1.25)
+			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 		else {
 			this.context.font = '24px Microsoft YaHei'
 			this.context.fillStyle = '#00a'
-			this.context.fillText(delta, num * 216 + 128, 600 + 24 * 1.25)
+			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 
 	}

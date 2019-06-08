@@ -16,6 +16,7 @@ class Skill {
 		this.desc = desc;
 		this.cd = cd;
 		this.cost = cost;
+		this.delta = 0;
 		if (typeof keyCode === 'number') {
 			this.keyCode = keyCode;
 		} else if (typeof keyCode === 'string' && keyCode.length === 1) {
@@ -23,13 +24,13 @@ class Skill {
 		} else {
 			throw new Error(`技能 ${name} 无法绑定按键 "${keyCode}"`);
 		}
-		this.lastCastTime = 0; // Date.now();
+		this.lastCastTime = 0;
 
 		this.bindKey();
 	}
 
 	refresh() {
-		this.lastCastTime = 0; // Date.now();
+		this.lastCastTime = 0;
 	}
 
 	bindKey() {
@@ -45,11 +46,11 @@ class Skill {
 				}
 			}
 		});
-		// TODO 通过canvas将技能名称、图标、描述、快捷键等显示出来
+
 		const keyName = typeof this.keyCode === 'number' ? String.fromCharCode(this.keyCode) : this.keyCode.map(key => String.fromCharCode(key)).join('/');
 
-		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
-		console.log(`CXK 已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${delta}`);
+		this.delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.9));
+		console.log(`CXK 已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${this.delta}`);
 		this.lastCastTime = 0;
 	}
 
@@ -59,24 +60,23 @@ class Skill {
 	cast() {
 		let nowtime = Date.now();
 
-		let delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.8));
 		if (this.lastCastTime + this.cd * 1000 > nowtime) {
 			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - nowtime) / 1000.00;
 			distan = distan.toFixed(2);
 			this.isRunning = 0;
 			throw new Error(`技能尚未冷却 (${distan} / ${this.cd})`);
 		}
-		if (this.main.score.allScore < delta) {
+		if (this.main.score.allScore < this.delta) {
 			this.isRunning = 0;
-			throw new Error(`积分不足 (${this.main.score.allScore} / ${delta})`);
+			throw new Error(`积分不足 (${this.main.score.allScore} / ${this.delta})`);
 		}
 
 		this.lastCastTime = nowtime; // 更新上次释放时间
-		this.main.score.scorepunishment += delta;  // 扣除积分
+		this.main.score.scorepunishment += this.delta;  // 扣除积分
 		this.main.score.computeScore();
 		// TODO 显示释放技能的特效
 
-		console.log(`CXK 消耗了 ${delta} 积分发动了技能 ${this.name}！\n${this.desc}`);
+		console.log(`CXK 消耗了 ${this.delta} 积分发动了技能 ${this.name}！\n${this.desc}`);
 
 		return 0;
 	}
@@ -121,15 +121,15 @@ class SkillQ extends Skill {
 		});
 
 		// 使用意念控制球转向
-		const speed = Math.pow(ball.speedX, 2) + Math.pow(ball.speedY, 2);
-		const expectTime = Math.sqrt(targetDistance / speed);
-		ball.speedX = (ball.x - targetBlock.x) / expectTime;
-		ball.speedY = (ball.y - targetBlock.y) / expectTime + 0.05;
+		ball.speedX = ball.x - targetBlock.x;
+		ball.speedY = ball.y - targetBlock.y;
+		if (ball.speedY == 0) {
+			ball.speedY = 0.01;
+		}
 		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
 		ball.speedX = ball.speedX * per;
 		ball.speedX = Math.min(ball.speedX, 120);
 		ball.speedX = Math.max(ball.speedX, -120);
-		console.log(`${ball.speedX} , ${ball.speedY}`);
 		ball.speedY = ball.speedY * per;
 	}
 }
@@ -139,9 +139,9 @@ class SkillW extends Skill {
 		super(main,
 			'虚鲲鬼步',
 			'',
-			'CXK 发动在美国校队时领悟的绝技，5 秒内可以无视移动速度限制，100% 接住篮球',
+			'CXK 发动在美国校队时领悟的绝技，5 秒内让篮球跟着 CXK',
 			15,
-			15,
+			20,
 			'W');
 		this.duration = 5;  // 持续5秒
 	}
@@ -152,10 +152,11 @@ class SkillW extends Skill {
 		};
 		const { paddle, ball } = this.main;
 		this.casting = setInterval(() => {
-			paddle.x = ball.x - paddle.w / 2;
+			ball.x = paddle.x + paddle.w / 2;
 		}, 10);
 		setTimeout(() => {
 			clearInterval(this.casting);
+			ball.speedX = 0;
 		}, this.duration * 1000);
 	}
 }
@@ -169,7 +170,6 @@ class SkillE extends Skill {
 			0.3,
 			2,
 			'E');
-		this.duration = 5;  // 持续5秒
 	}
 
 	cast() {
