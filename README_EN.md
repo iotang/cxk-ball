@@ -4,23 +4,41 @@
 
 This Project's name is "CXK Play BasketBall" Game，The original Project：[h5-game-blockBreaker](https://github.com/yangyunhe369/h5-game-blockBreaker)
 
-Finally, If you like this game, please give me a star, thanks!
+Finally, If you like this game, please give us a star, thanks!
 
 ## Game Screenshots
 
 ![](https://s2.ax1x.com/2019/06/04/Vtzjuq.png)
 
-The game has several levels to choose from (easy, normal, difficult, super hard and more harder difficulties)
+The game has many speed levels to choose.
+
+From EXTREME-EASY to I WANNA, there will be a level fit you.
 
 The mode which speed>=8, Please ikun's don't try it lightly, Otherwise it might go crazy. (XD
 
 ![](https://s2.ax1x.com/2019/06/04/VN9bCD.gif)
 
+> Translate:
+>
+> Difficulty: Ori and the Blind Forest-like, Speed 10
+>
+> Level 1
+>
+> Q: Ball Mind-controlling, CD 3 sec, Cost 2524
+>
+> W: Kun's Shuffle, CD 15 sec, Cost 9465
+>
+> E: Blink Master, CD 0.3 sec, Cost 1262
+>
+> Score: 53594 (final)
+
 Wish you have a good game!
 
 ## How to experience
 
-You can git clone this project to local
+You can play it online on the temporary [demo](https://sycstudio.com/cxk-ball/).
+
+And also you can git clone this project to local.
 
 Original Project:
 
@@ -38,7 +56,7 @@ Browse your Homepage or use Browser opens `index.html` to play.
 
 ## Common problems
 
-If encounter any problems, please try to refresh, else if refresh can't solve problems, Please Press Button F12 to open the browser console view whether or not to report errors.
+If encounter any problems, please try to refresh. If it can't solve problems, Please Press Button F12 to open the browser console view whether or not to report errors.
 
 If so, you can try to solve it yourself or take a screenshot through the Issues feedback, please provide information about the browser and the device, please follow the Issues specification.
 

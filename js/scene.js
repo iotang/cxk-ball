@@ -66,6 +66,8 @@ class Ball {
 			// 碰撞边界检测
 			if (this.x < 0 || this.x > canvas.clientWidth - this.w) {
 				this.speedX *= -1
+				this.x = Math.max(this.x, 0);
+				this.x = Math.min(this.x, canvas.clientWidth - this.w);
 			}
 			if (this.y < 0) {
 				this.speedY *= -1
@@ -166,16 +168,27 @@ class Score {
 			blockList: _main.blockList,                     // 砖块对象集合
 			blockListLen: _main.blockList.length,           // 砖块总数量
 			lv: _main.LV,                                   // 当前关卡
+
+			grandHighestScore: 53594,                       // 最高分
 		}
 		Object.assign(this, s)
 	}
 	// 计算总分
 	computeScore() {
 		let num = 0
-		let allNum = this.blockListLen
 		this.score = Math.ceil(Math.pow(window.cacheBallSpeed, 3))
 		num = this.blockListLen - this.blockList.length
 		this.allScore = this.score * num - this.scorepunishment
+
+		this.grandHighestScore = Math.max(this.grandHighestScore, this.allScore + globalScore)
+	}
+
+	refresh() {
+		this.allScore = 0;
+		this.scorepunishment = 0;
+		this.blockList = _main.blockList;
+		this.blockListLen = _main.blockList.length;
+		this.lv = _main.LV;
 	}
 }
 // 定义场景

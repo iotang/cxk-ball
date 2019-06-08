@@ -127,6 +127,9 @@ class SkillQ extends Skill {
 		ball.speedY = (ball.y - targetBlock.y) / expectTime + 0.05;
 		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
 		ball.speedX = ball.speedX * per;
+		ball.speedX = Math.min(ball.speedX, 120);
+		ball.speedX = Math.max(ball.speedX, -120);
+		console.log(`${ball.speedX} , ${ball.speedY}`);
 		ball.speedY = ball.speedY * per;
 	}
 }

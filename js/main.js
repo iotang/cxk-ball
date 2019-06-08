@@ -47,7 +47,8 @@ let _main = {
 		/**
 		 * 计分板
 		 */
-		self.score = new Score(self)
+		if (self.score == null)self.score = new Score(self);
+		else self.score.refresh();
 		/**
 		 * 游戏主要逻辑
 		 */
@@ -55,8 +56,10 @@ let _main = {
 
 		if (self.skillq == null) self.skillq = new SkillQ(self);
 		else self.skillq.refresh();
+
 		if (self.skillw == null) self.skillw = new SkillW(self);
 		else self.skillw.refresh();
+
 		if (self.skille == null) self.skille = new SkillE(self);
 		else self.skille.refresh();
 		/**

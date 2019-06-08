@@ -65,15 +65,35 @@ class Game {
 	}
 	// 绘制计数板
 	drawText(obj) {
+
+		this.context.textAlign="end"
+		
 		this.context.font = '24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
 		// 绘制分数
-		this.context.fillText(obj.text, this.canvas.width - 24 * 2, this.canvas.height - 10 - 72)
+		this.context.fillText(obj.text, this.canvas.width - 8, this.canvas.height - 10 - 72)
 
 		this.context.font = 'bold 72px Microsoft YaHei'
 		this.context.fillStyle = '#000'
-		this.context.fillText(obj.allScore, this.canvas.width - 48 - Math.floor(Math.log10(Math.max(1, obj.allScore))) * 42, this.canvas.height - 10)
+		this.context.fillText(obj.allScore, this.canvas.width - 8, this.canvas.height - 10)
 
+		let isReachedHighScore = (obj.grandHighestScore <= globalScore + obj.allScore);
+
+		if(isReachedHighScore) this.context.fillStyle = '#090';
+		else this.context.fillStyle = '#666';
+		this.context.font = 'italic 18px Microsoft YaHei'
+		this.context.fillText("累计", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36)
+		this.context.font = 'italic bold 24px Microsoft YaHei'
+		this.context.fillText(globalScore + obj.allScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36)
+
+		if(isReachedHighScore) this.context.fillStyle = '#090';
+		else this.context.fillStyle = '#009';
+		this.context.font = 'italic 18px Microsoft YaHei'
+		this.context.fillText("最高", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36 - 24)
+		this.context.font = 'italic bold 24px Microsoft YaHei'
+		this.context.fillText(obj.grandHighestScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36 - 24)
+
+		this.context.textAlign="start"
 
 		this.context.font = 'bold 24px Microsoft YaHei'
 		this.context.fillStyle = '#000'
@@ -224,12 +244,12 @@ class Game {
 			}
 		})
 		// 挡板移动时边界检测
-		if (p.x <= 0) { // 到左边界时
+		if (p.x <= 0 - 30) { // 到左边界时
 			p.isLeftMove = false
 		} else {
 			p.isLeftMove = true
 		}
-		if (p.x >= canvas.clientWidth - p.w) { // 到右边界时
+		if (p.x >= canvas.clientWidth - p.w + 30) { // 到右边界时
 			p.isRightMove = false
 		} else {
 			p.isRightMove = true
