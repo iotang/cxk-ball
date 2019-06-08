@@ -71,6 +71,7 @@ class Ball {
 			}
 			if (this.y < 0) {
 				this.speedY *= -1
+				this.y = 0;
 			}
 			if (this.y > _main.ballshadow.y - (this.h - 16)) {
 				// 游戏结束
@@ -169,7 +170,7 @@ class Score {
 			blockListLen: _main.blockList.length,           // 砖块总数量
 			lv: _main.LV,                                   // 当前关卡
 
-			grandHighestScore: 53594,                       // 最高分
+			grandHighestScore: 63045,                       // 最高分
 		}
 		Object.assign(this, s)
 	}

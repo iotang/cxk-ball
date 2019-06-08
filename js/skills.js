@@ -130,7 +130,8 @@ class SkillQ extends Skill {
 		ball.speedX = ball.speedX * per;
 		ball.speedX = Math.min(ball.speedX, 120);
 		ball.speedX = Math.max(ball.speedX, -120);
-		ball.speedY = ball.speedY * per;
+		if (ball.speedY >= 0) ball.speedY = window.cacheBallSpeed;
+		else ball.speedY = -window.cacheBallSpeed;
 	}
 }
 

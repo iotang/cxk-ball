@@ -14,7 +14,7 @@
 
 ## 游戏截图
 
-![](https://s2.ax1x.com/2019/06/04/Vtzjuq.png)
+![](https://s2.ax1x.com/2019/06/08/VDWlpq.png)
 
 游戏有更多种难度可选择
 
@@ -22,7 +22,7 @@
 
 速度大于等于 8 的难度请勿轻易尝试，否则可能会疯掉（雾
 
-![](https://s2.ax1x.com/2019/06/04/VN9bCD.gif)
+![](https://s2.ax1x.com/2019/06/08/VDWKts.gif)
 
 祝您游戏愉快
 
