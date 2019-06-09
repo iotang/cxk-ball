@@ -68,22 +68,26 @@
 				</center>
 				<hr>
 				<h3>游戏说明</h3>
-				<p>使用方向键控制 CXK 左右移动。</p>
-				<p>使用回车让 CXK 发球。</p>
-				<p>按 P 暂停游戏。</p>
-				<p>通关后按 N 进入下一关。</p>
+				<p>方向键：控制 CXK 左右移动。</p>
+				<p>回车：让 CXK 发球。</p>
+				<p>P：暂停游戏。</p>
+				<p>N：通关后进入下一关。</p>
 				<p>技能[Q] 意念控球，控制球转向一次，朝向离球最近的一个砖块。</p>
 				<p>技能[W] 虚鲲鬼步，5 秒内让篮球跟着 CXK。</p>
 				<p>技能[E] 闪烁之鲲，向当前朝向闪烁一小段距离。如果离球足够近，那么会直接闪烁到球的下面。</p>
-				<p>技能[R] 爱坤之祝，其它三个技能的 CD 和消耗大幅降低。</p>
-				<p>移动端可以点击屏幕左右控制 CXK 移动。</p>
+				<p>技能[R] 爱坤之祝，其它三个技能的 CD 和消耗大幅降低，持续 10 秒。</p>
 				<p>如果出现显示不正常的情况请截图并通过 Issues 反馈。</p>
 				<p>欢迎来玩难度选择时涉及的游戏</p>
+				<details>
+					<summary style="font-size: 18px; cursor: pointer;">移动端点此查看操作</summary>
+					<img src="images/cxk_ball_control.png" width="100%">
+				</details>
 				<hr>
 				<h3>更新记录</h3>
 				<details>
 					<summary style="cursor: pointer;">点击查看更新内容</summary>
 					<div style="margin-top: 8px;">
+						<p>[分支]1.6.7：修正移动端体验，优化性能</p>
 						<p>[分支]1.6.6：修正移动端体验，增加技能R，CXK 技能已经凑齐</p>
 						<p>[分支]1.6.5：修正有关球的移动 bug，更改技能W</p>
 						<p>[分支]1.6.4：修正技能Q的速度 bug，增加最高分功能</p>
@@ -144,7 +148,8 @@
 		canvas.height = 936 / 1000 * 563;
 		canvas.setAttribute("style", "");
 		canvas.style.zoom = (cdiv.clientWidth / 936);
-	} else
+	}
+	else
 	{
 
 	}
@@ -161,15 +166,18 @@
 			{
 				_main.paddle.image.src = "images/paddle2_" + move_way + ".png";
 				cxk_body = 2;
-			} else if (cxk_body == 2)
+			}
+			else if (cxk_body == 2)
 			{
 				_main.paddle.image.src = "images/paddle3_" + move_way + ".png";
 				cxk_body = 3;
-			} else if (cxk_body == 4)
+			}
+			else if (cxk_body == 4)
 			{
 				_main.paddle.image.src = "images/paddle4_" + move_way + ".png";
 				cxk_body = 3;
-			} else
+			}
+			else
 			{
 				_main.paddle.image.src = "images/paddle_" + move_way + ".png";
 				cxk_body = 1;
@@ -180,7 +188,7 @@
 		{
 			_main.ballshadow.y = 545;
 			_main.ballshadow.x = _main.ball.x;
-		}, 10);
+		}, 1000 / 60);
 	}
 </script>
 

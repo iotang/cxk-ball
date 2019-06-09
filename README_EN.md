@@ -66,6 +66,10 @@ If encounter any problems, please try to refresh. If it can't solve problems, Pl
 
 If so, you can try to solve it yourself or take a screenshot through the Issues feedback, please provide information about the browser and the device, please follow the Issues specification.
 
+> **Q: How to cast skills?**
+
+[See this picture](images/cxk_ball_control.png)
+
 > **Q: Does this game infringe on the portrait rights of others**
 
 [Please see this note](about.md)

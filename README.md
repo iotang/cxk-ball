@@ -52,6 +52,10 @@ git clone https://github.com/iotang/cxk-ball
 
 如果有，可尝试自行解决或者截图通过 Issues 反馈给我们，同时请提供浏览器及使用设备的信息，请按照 Issues 规范填写。
 
+> **问：移动端怎么搓技能啊**
+
+[查看图片](images/cxk_ball_control.png)
+
 > **问：这个游戏是否侵犯他人肖像权**
 
 [请看这篇说明](about.md)

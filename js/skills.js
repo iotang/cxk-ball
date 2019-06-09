@@ -22,10 +22,12 @@ class Skill
 		if (typeof keyCode === "number")
 		{
 			this.keyCode = keyCode;
-		} else if (typeof keyCode === "string" && keyCode.length === 1)
+		}
+		else if (typeof keyCode === "string" && keyCode.length === 1)
 		{
 			this.keyCode = keyCode.toUpperCase().charCodeAt(0);
-		} else
+		}
+		else
 		{
 			throw new Error(`技能 ${name} 无法绑定按键 "${keyCode}"`);
 		}
@@ -76,7 +78,7 @@ class Skill
 		if (this.lastCastTime + this.cd * 1000 > nowtime)
 		{
 			let distan = this.cd - ((this.lastCastTime + this.cd * 1000) - nowtime) / 1000.00;
-			distan = distaskille.deltan.toFixed(2);
+			distan = distan.toFixed(2);
 			this.isRunning = 0;
 			throw new Error(`技能尚未冷却 (${distan} / ${this.cd})`);
 		}
@@ -182,7 +184,7 @@ class SkillW extends Skill
 		this.casting = setInterval(() =>
 		{
 			ball.x = paddle.x + paddle.w / 2;
-		}, 10);
+		}, 1000 / 60);
 		setTimeout(() =>
 		{
 			clearInterval(this.casting);
@@ -282,7 +284,7 @@ class SkillR extends Skill
 				skillw.delta = Math.ceil(skillwdlt / 3);
 				skille.delta = Math.ceil(skilledlt / 3);
 			}
-		}, 10);
+		}, 125);
 
 		setTimeout(() =>
 		{

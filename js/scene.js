@@ -49,7 +49,8 @@ class Paddle
 		if (rangeX < 0)
 		{ // 小球撞击挡板左侧
 			return rangeX / (b.w / 2 + p.w / 2) * p.ballSpeedMax
-		} else if (rangeX > 0)
+		}
+		else if (rangeX > 0)
 		{ // 小球撞击挡板右侧
 			return rangeX / (b.w / 2 + p.w / 2) * p.ballSpeedMax
 		}
@@ -145,7 +146,8 @@ class Block
 		if (this.life == 0)
 		{
 			this.alive = false
-		} else if (this.life == 1)
+		}
+		else if (this.life == 1)
 		{
 			this.image = imageFromPath(allImg.block1)
 		}
@@ -159,7 +161,8 @@ class Block
 		{
 			this.kill()
 			return true
-		} else
+		}
+		else
 		{
 			return false
 		}
@@ -178,7 +181,8 @@ class Block
 			if (b.x < bk.x && b.speedX > 0 || b.x > bk.x && b.speedX < 0)
 			{ // 小球在砖块左侧时
 				return false
-			} else
+			}
+			else
 			{ // 小球在砖块右侧
 				return true
 			}
@@ -252,7 +256,8 @@ class Scene
 				{
 					let obj = new Block(list.x, list.y)
 					arr.push(obj)
-				} else if (list.type === 2)
+				}
+				else if (list.type === 2)
 				{
 					let obj = new Block(list.x, list.y, 2)
 					arr.push(obj)
@@ -286,10 +291,12 @@ class Scene
 					if (i === 0)
 					{
 						xNum = 1
-					} else if (i === 1)
+					}
+					else if (i === 1)
 					{
 						xNum = 2
-					} else
+					}
+					else
 					{
 						xNum += 2
 					}
@@ -304,7 +311,8 @@ class Scene
 								y: y_start + i * 20,
 								type: 2,
 							})
-						} else
+						}
+						else
 						{
 							arr.push({
 								x: x_start + k * 50,
@@ -327,10 +335,12 @@ class Scene
 					if (i === yNum - 1)
 					{
 						xNum = 1
-					} else if (i === 0)
+					}
+					else if (i === 0)
 					{
 						xNum = xNum
-					} else
+					}
+					else
 					{
 						xNum -= 2
 					}
@@ -345,7 +355,8 @@ class Scene
 								y: y_start + i * 20,
 								type: 2,
 							})
-						} else
+						}
+						else
 						{
 							arr.push({
 								x: x_start + k * 50,
@@ -368,10 +379,12 @@ class Scene
 					if (i === 0)
 					{
 						xNum = xNum
-					} else if (i > 4)
+					}
+					else if (i > 4)
 					{
 						xNum += 2
-					} else
+					}
+					else
 					{
 						xNum -= 2
 					}
@@ -386,7 +399,8 @@ class Scene
 								y: y_start + i * 20,
 								type: 2,
 							})
-						} else
+						}
+						else
 						{
 							arr.push({
 								x: x_start + k * 50,
@@ -419,7 +433,8 @@ class Scene
 									y: y_start + i * 20,
 									type: 2,
 								})
-							} else
+							}
+							else
 							{
 								arr.push({
 									x: x_start + k * 50,

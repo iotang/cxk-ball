@@ -122,41 +122,41 @@ class Game
 		if (isCDOK && isScoreOK) this.context.fillStyle = "#99f";
 		else this.context.fillStyle = "#ccc";
 		this.context.font = "bold 48px Microsoft YaHei"
-		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216 + 3, 600 + 3)
+		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216 + 3, this.canvas.height - 36 + 3)
 
 		if (isCDOK && isScoreOK) this.context.fillStyle = "#000";
 		else this.context.fillStyle = "#999";
 		this.context.font = "bold 48px Microsoft YaHei"
-		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216, 600)
+		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216, this.canvas.height - 36)
 		this.context.font = "24px Microsoft YaHei"
-		this.context.fillText(obj.name, num * 216 + 48, 600)
+		this.context.fillText(obj.name, num * 216 + 48, this.canvas.height - 36)
 
 		if (!isCDOK)
 		{
 			this.context.font = "24px Microsoft YaHei"
 			this.context.fillStyle = "#a00"
-			this.context.fillText("CD " + distan + "s", num * 216, 600 + 24 * 1.25)
+			this.context.fillText("CD " + distan + "s", num * 216, this.canvas.height - 36 + 24 * 1.25)
 		}
 		else
 		{
 			this.context.font = "bold 24px Microsoft YaHei"
 			this.context.fillStyle = "#0a0"
-			this.context.fillText("Ready", num * 216, 600 + 24 * 1.25)
+			this.context.fillText("Ready", num * 216, this.canvas.height - 36 + 24 * 1.25)
 			this.context.font = "18px Microsoft YaHei"
 			this.context.fillStyle = "#000"
-			this.context.fillText("(" + obj.cd + ")", num * 216 + 80, 600 + 24 * 1.25)
+			this.context.fillText("(" + obj.cd + ")", num * 216 + 80, this.canvas.height - 36 + 24 * 1.25)
 		}
 		if (!isScoreOK)
 		{
 			this.context.font = "bold 24px Microsoft YaHei"
 			this.context.fillStyle = "#a00"
-			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
+			this.context.fillText(obj.delta, num * 216 + 128, this.canvas.height - 36 + 24 * 1.25)
 		}
 		else
 		{
 			this.context.font = "24px Microsoft YaHei"
 			this.context.fillStyle = "#00a"
-			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
+			this.context.fillText(obj.delta, num * 216 + 128, this.canvas.height - 36 + 24 * 1.25)
 		}
 
 	}
@@ -271,7 +271,8 @@ class Game
 			if (Math.abs(b.y + b.h / 2 - p.y + p.h / 2) > Math.abs(b.y + b.h / 2 + b.speedY - p.y + p.h / 2))
 			{
 				b.speedY *= -1
-			} else
+			}
+			else
 			{
 				b.speedY *= 1
 			}
@@ -293,11 +294,13 @@ class Game
 					if (!item.collideBlockHorn(b))
 					{
 						b.speedY *= -1
-					} else
+					}
+					else
 					{ // 当小球撞击砖块四角时，Y轴速度不变
 						b.speedY *= 1
 					}
-				} else
+				}
+				else
 				{
 					b.speedY *= 1
 				}
@@ -314,14 +317,16 @@ class Game
 		if (p.x <= 0 - 30)
 		{ // 到左边界时
 			p.isLeftMove = false
-		} else
+		}
+		else
 		{
 			p.isLeftMove = true
 		}
 		if (p.x >= canvas.clientWidth - p.w + 30)
 		{ // 到右边界时
 			p.isRightMove = false
-		} else
+		}
+		else
 		{
 			p.isRightMove = true
 		}
@@ -355,7 +360,8 @@ class Game
 					g.state = g.state_UPDATE
 					// 挑战成功，渲染通关场景
 					g.finalGame()
-				} else
+				}
+				else
 				{ // 其余关卡通关
 					// 升级通关
 					g.state = g.state_UPDATE
@@ -374,7 +380,8 @@ class Game
 				g.checkBallBlock(g, paddle, ball, blockList, score)
 				// 绘制游戏所有素材
 				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille, skillr)
-			} else if (g.state === g.state_START)
+			}
+			else if (g.state === g.state_START)
 			{
 				// 绘制游戏所有素材
 				g.draw(paddle, ball, ballshadow, blockList, score, skillq, skillw, skille, skillr)
@@ -387,6 +394,7 @@ class Game
 	init()
 	{
 		let g = this,
+			canvas = this.canvas,
 			paddle = g.main.paddle,
 			ball = g.main.ball,
 			ballshadow = g.main.ballshadow,
@@ -402,10 +410,12 @@ class Game
 			if (event.keyCode == 65)
 			{
 				g.keydowns[37] = true;
-			} else if (event.keyCode == 68)
+			}
+			else if (event.keyCode == 68)
 			{
 				g.keydowns[39] = true;
-			} else
+			}
+			else
 			{
 				g.keydowns[event.keyCode] = true
 			}
@@ -415,10 +425,12 @@ class Game
 			if (event.keyCode == 65)
 			{
 				g.keydowns[37] = false;
-			} else if (event.keyCode == 68)
+			}
+			else if (event.keyCode == 68)
 			{
 				g.keydowns[39] = false;
-			} else
+			}
+			else
 			{
 				g.keydowns[event.keyCode] = false
 			}
@@ -426,81 +438,81 @@ class Game
 		// 设置鼠标点击
 		window.addEventListener("mousedown", function (event)
 		{
-			var clientWidth = document.body.clientWidth;
+			var clientWidth = document.documentElement.clientWidth;
+			var clientHeight = document.documentElement.clientHeight;
 			let y = event.clientY;
 			let x = event.clientX;
-			if (y >= 175 && y <= 682)
+			if (y <= clientHeight * 3 / 4)
 			{
 				if (x < clientWidth / 2)
 				{
 					g.keydowns[37] = true;
-				} else
+					g.keydowns[39] = false;
+				}
+				else
 				{
+					g.keydowns[37] = false;
 					g.keydowns[39] = true;
 				}
 			}
-			else if (y >= 683 && y <= 815)
+			else
 			{
-				if (88 + 216 * 0 < x && x < 88 + 216 * 1) skillq.cast();
-				if (88 + 216 * 1 < x && x < 88 + 216 * 2) skillw.cast();
-				if (88 + 216 * 2 < x && x < 88 + 216 * 3) skille.cast();
-				if (88 + 216 * 3 < x && x < 88 + 216 * 4) skillr.cast();
+				if (clientWidth * 0 / 4 <= x && x < clientWidth * 1 / 4) skillq.cast();
+				if (clientWidth * 1 / 4 <= x && x < clientWidth * 2 / 4) skillw.cast();
+				if (clientWidth * 2 / 4 <= x && x < clientWidth * 3 / 4) skille.cast();
+				if (clientWidth * 3 / 4 <= x && x <= clientWidth * 4 / 4) skillr.cast();
 			}
 		})
 		window.addEventListener("mouseup", function (event)
 		{
-			var clientWidth = document.body.clientWidth;
+			var clientWidth = document.documentElement.clientWidth;
+			var clientHeight = document.documentElement.clientHeight;
 			let y = event.clientY;
 			let x = event.clientX;
-			if (y >= 175 && y <= 682)
+			if (y <= clientHeight * 3 / 4)
 			{
-				if (x < clientWidth / 2)
-				{
-					g.keydowns[37] = false;
-				} else
-				{
-					g.keydowns[39] = false;
-				}
+				g.keydowns[37] = false;
+				g.keydowns[39] = false;
 			}
 		})
 		window.addEventListener("touchstart", function (event)
 		{
-			var clientWidth = document.body.clientWidth;
+			var clientWidth = document.documentElement.clientWidth;
+			var clientHeight = document.documentElement.clientHeight;
 			let y = event.touches[0].pageY;
 			let x = event.touches[0].pageX;
-			if (y >= 175 && y <= 682)
+			if (y <= clientHeight * 3 / 4)
 			{
 				if (x < clientWidth / 2)
 				{
 					g.keydowns[37] = true;
-				} else
+					g.keydowns[39] = false;
+				}
+				else
 				{
+					g.keydowns[37] = false;
 					g.keydowns[39] = true;
 				}
 			}
-			else if (y >= 683 && y <= 815)
+			else
 			{
-				if (88 + 216 * 0 < x && x < 88 + 216 * 1) skillq.cast();
-				if (88 + 216 * 1 < x && x < 88 + 216 * 2) skillw.cast();
-				if (88 + 216 * 2 < x && x < 88 + 216 * 3) skille.cast();
-				if (88 + 216 * 3 < x && x < 88 + 216 * 4) skillr.cast();
+				if (clientWidth * 0 / 4 <= x && x < clientWidth * 1 / 4) skillq.cast();
+				if (clientWidth * 1 / 4 <= x && x < clientWidth * 2 / 4) skillw.cast();
+				if (clientWidth * 2 / 4 <= x && x < clientWidth * 3 / 4) skille.cast();
+				if (clientWidth * 3 / 4 <= x && x <= clientWidth * 4 / 4) skillr.cast();
 			}
 			event.preventDefault();
 		})
 		window.addEventListener("touchend", function (event)
 		{
-			var clientWidth = document.body.clientWidth;
+			var clientWidth = document.documentElement.clientWidth;
+			var clientHeight = document.documentElement.clientHeight;
 			let y = event.touches[0].pageY;
 			let x = event.touches[0].pageX;
-			if (y >= 175 && y <= 682)
+			if (y <= clientHeight * 3 / 4)
 			{
-				if (x < clientWidth / 2)
-				{
-					g.keydowns[37] = false;
-				} else
-				{
-					g.keydowns[39] = false;
-				}
+				g.keydowns[37] = false;
+				g.keydowns[39] = false;
 			}
 		})
 		g.registerAction = function (key, callback)
@@ -540,7 +552,8 @@ class Game
 					g.state = g.state_START
 					// 初始化
 					g.main.start()
-				} else
+				}
+				else
 				{
 					// 开始游戏
 					ball.fired = true
@@ -585,7 +598,8 @@ class Game
 							g.state = g.state_START
 							// 初始化
 							g.main.start()
-						} else
+						}
+						else
 						{
 							// 开始游戏
 							ball.fired = true
@@ -605,7 +619,8 @@ class Game
 							g.state = g.state_START
 							// 初始化
 							g.main.start()
-						} else
+						}
+						else
 						{
 							// 开始游戏
 							ball.fired = true
@@ -626,15 +641,20 @@ class Game
 						$("#ballspeedset").attr("disabled", "disabled");
 					}
 					break
-				/* case 77 :
-				  if($("#audio").attr("src") == "media/jntm.m4a") {
-					  audio.src = "about:blank";
-					  audio.pause();
-				  } else {
-					  audio.src = "media/jntm.m4a";
-					  audio.play();
-				  }
-				  break */
+					/*
+				case 77:
+					if ($("#audio").attr("src") == "media/jntm.m4a")
+					{
+						audio.src = "about:blank";
+						audio.pause();
+					}
+					else
+					{
+						audio.src = "media/jntm.m4a";
+						audio.play();
+					}
+					break
+					*/
 				// P 键暂停游戏事件
 				case 80:
 					if (g.state !== g.state_UPDATE && g.state !== g.state_GAMEOVER)

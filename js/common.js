@@ -27,7 +27,8 @@ const isPageHidden = function (game)
 			{
 				game.state = game.state_RUNNING
 			}, 100)
-		} else
+		}
+		else
 		{ // 不可见状态
 			game.state = game.state_STOP
 		}
