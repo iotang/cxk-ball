@@ -8,29 +8,35 @@ Finally, If you like this game, please give us a star, thanks!
 
 ## Game Screenshots
 
-![](https://s2.ax1x.com/2019/06/04/Vtzjuq.png)
+![Game Main Screenshot](https://s2.ax1x.com/2019/06/09/VrCgQx.png)
 
 The game has many speed levels to choose.
 
 From EXTREME-EASY to I WANNA, there will be a level fit you.
 
-The mode which speed>=8, Please ikun's don't try it lightly, Otherwise it might go crazy. (XD
+The mode which speed>=8, Please ikuns don't try it lightly, Otherwise you might go crazy. (XD
 
-![](https://s2.ax1x.com/2019/06/04/VN9bCD.gif)
+![Lv10 Failure](https://s2.ax1x.com/2019/06/09/VrCfeO.gif)
 
 > Translate:
 >
 > Difficulty: Ori and the Blind Forest-like, Speed 10
 >
-> Level 1
+> Level: 1
 >
-> Q: Ball Mind-controlling, CD 3 sec, Cost 2524
+> Q: Ball Mind-controlling, CD 3 sec, Cost 3178
 >
-> W: Kun's Shuffle, CD 15 sec, Cost 9465
+> W: Kun's Shuffle, CD 15 sec, Cost 15887
 >
-> E: Blink Master, CD 0.3 sec, Cost 1262
+> E: Blink Master, CD 0.2 sec, Cost 993
 >
-> Score: 53594 (final)
+> R: Ikuns' Bless, CD 30 sec, Cost 4766
+>
+> Hi-Score: 63045 (start)
+>
+> Sum of Score: 125494 (final)
+>
+> Now Score: XXXX
 
 Wish you have a good game!
 
@@ -78,7 +84,7 @@ The performance of the device is too low, it is recommended to use a computer to
 
 > __Q: I can't hear the sound__
 
-No music provided now.
+No music provided now. :(
 
 ## Future plans
 

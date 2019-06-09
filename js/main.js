@@ -23,8 +23,10 @@ let _main = {
 	skillq: null,                        // q技能
 	skillw: null,                        // w技能
 	skille: null,                        // e技能
+	skillr: null,                        // r技能
 
-	start: function () {                 // 游戏启动函数
+	start: function ()
+	{                 // 游戏启动函数
 		let self = this
 		/**
 		 * 生成场景（根据游戏难度级别不同，生成不同关卡）
@@ -62,6 +64,9 @@ let _main = {
 
 		if (self.skille == null) self.skille = new SkillE(self);
 		else self.skille.refresh();
+
+		if (self.skillr == null) self.skillr = new SkillR(self);
+		else self.skillr.refresh();
 		/**
 		 * 游戏初始化
 		 */
