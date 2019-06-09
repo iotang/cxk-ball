@@ -194,8 +194,8 @@ class Score
 		let s = {
 			x: _main.score_x,                               // x轴坐标
 			y: _main.score_y,                               // y轴坐标
-			text: '分数 ',                                  // 文本分数
-			textLv: '关卡 ',                                // 关卡文本
+			text: "分数",                                  // 文本分数
+			textLv: "关卡",                                // 关卡文本
 			score: 1,                                       // 每个砖块对应分数
 			allScore: 0,                                    // 总分
 			scorepunishment: 0,                             // 分数惩罚

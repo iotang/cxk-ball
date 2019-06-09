@@ -74,38 +74,37 @@ class Game
 	// 绘制计数板
 	drawText(obj)
 	{
-
 		this.context.textAlign = "end"
 
-		this.context.font = '24px Microsoft YaHei'
-		this.context.fillStyle = '#000'
+		this.context.font = "24px Microsoft YaHei"
+		this.context.fillStyle = "#000"
 		// 绘制分数
 		this.context.fillText(obj.text, this.canvas.width - 8, this.canvas.height - 10 - 72)
 
-		this.context.font = 'bold 72px Microsoft YaHei'
-		this.context.fillStyle = '#000'
+		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.fillStyle = "#000"
 		this.context.fillText(obj.allScore, this.canvas.width - 8, this.canvas.height - 10)
 
 		let isReachedHighScore = (obj.grandHighestScore <= globalScore + obj.allScore);
 
-		if (isReachedHighScore) this.context.fillStyle = '#090';
-		else this.context.fillStyle = '#666';
-		this.context.font = 'italic 18px Microsoft YaHei'
+		if (isReachedHighScore) this.context.fillStyle = "#090";
+		else this.context.fillStyle = "#666";
+		this.context.font = "italic 18px Microsoft YaHei"
 		this.context.fillText("累计", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36)
-		this.context.font = 'italic bold 24px Microsoft YaHei'
+		this.context.font = "italic bold 24px Microsoft YaHei"
 		this.context.fillText(globalScore + obj.allScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36)
 
-		if (isReachedHighScore) this.context.fillStyle = '#090';
-		else this.context.fillStyle = '#009';
-		this.context.font = 'italic 18px Microsoft YaHei'
+		if (isReachedHighScore) this.context.fillStyle = "#090";
+		else this.context.fillStyle = "#009";
+		this.context.font = "italic 18px Microsoft YaHei"
 		this.context.fillText("最高", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36 - 24)
-		this.context.font = 'italic bold 24px Microsoft YaHei'
+		this.context.font = "italic bold 24px Microsoft YaHei"
 		this.context.fillText(obj.grandHighestScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36 - 24)
 
 		this.context.textAlign = "start"
 
-		this.context.font = 'bold 24px Microsoft YaHei'
-		this.context.fillStyle = '#000'
+		this.context.font = "bold 24px Microsoft YaHei"
+		this.context.fillStyle = "#000"
 		this.context.fillText(obj.textLv + obj.lv, obj.x, obj.y)
 
 		storageScore = obj.allScore;
@@ -120,43 +119,43 @@ class Game
 		let isCDOK = (distan <= 0);
 		let isScoreOK = (obj.main.score.allScore >= obj.delta);
 
-		if (isCDOK && isScoreOK) this.context.fillStyle = '#99f';
-		else this.context.fillStyle = '#ccc';
-		this.context.font = 'bold 48px Microsoft YaHei'
+		if (isCDOK && isScoreOK) this.context.fillStyle = "#99f";
+		else this.context.fillStyle = "#ccc";
+		this.context.font = "bold 48px Microsoft YaHei"
 		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216 + 3, 600 + 3)
 
-		if (isCDOK && isScoreOK) this.context.fillStyle = '#000';
-		else this.context.fillStyle = '#999';
-		this.context.font = 'bold 48px Microsoft YaHei'
+		if (isCDOK && isScoreOK) this.context.fillStyle = "#000";
+		else this.context.fillStyle = "#999";
+		this.context.font = "bold 48px Microsoft YaHei"
 		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216, 600)
-		this.context.font = '24px Microsoft YaHei'
+		this.context.font = "24px Microsoft YaHei"
 		this.context.fillText(obj.name, num * 216 + 48, 600)
 
 		if (!isCDOK)
 		{
-			this.context.font = '24px Microsoft YaHei'
-			this.context.fillStyle = '#a00'
+			this.context.font = "24px Microsoft YaHei"
+			this.context.fillStyle = "#a00"
 			this.context.fillText("CD " + distan + "s", num * 216, 600 + 24 * 1.25)
 		}
 		else
 		{
-			this.context.font = 'bold 24px Microsoft YaHei'
-			this.context.fillStyle = '#0a0'
+			this.context.font = "bold 24px Microsoft YaHei"
+			this.context.fillStyle = "#0a0"
 			this.context.fillText("Ready", num * 216, 600 + 24 * 1.25)
-			this.context.font = '18px Microsoft YaHei'
-			this.context.fillStyle = '#000'
+			this.context.font = "18px Microsoft YaHei"
+			this.context.fillStyle = "#000"
 			this.context.fillText("(" + obj.cd + ")", num * 216 + 80, 600 + 24 * 1.25)
 		}
 		if (!isScoreOK)
 		{
-			this.context.font = 'bold 24px Microsoft YaHei'
-			this.context.fillStyle = '#a00'
+			this.context.font = "bold 24px Microsoft YaHei"
+			this.context.fillStyle = "#a00"
 			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 		else
 		{
-			this.context.font = '24px Microsoft YaHei'
-			this.context.fillStyle = '#00a'
+			this.context.font = "24px Microsoft YaHei"
+			this.context.fillStyle = "#00a"
 			this.context.fillText(obj.delta, num * 216 + 128, 600 + 24 * 1.25)
 		}
 
@@ -172,12 +171,22 @@ class Game
 		// 绘制背景图
 		//this.drawBg()
 		// 绘制提示文字
-		this.context.font = '32px Microsoft YaHei'
-		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，你球掉了！', 445, 226);
-		this.context.fillText('得分 ', 445, 226 + 32 * 1.5)
-		this.context.font = 'bold 36px Microsoft YaHei'
-		this.context.fillText(globalScore, 445 + 70, 226 + 32 * 1.5 + 2)
+		let x = this.canvas.width / 2;
+		let y = this.canvas.height / 2 - 100;
+		this.context.textAlign = "center"
+		this.context.font = "32px Microsoft YaHei"
+		this.context.fillStyle = "#000"
+		this.context.fillText("CXK，你球掉了！", x, y);
+		this.context.font = "18px Microsoft YaHei"
+		this.context.fillText("总得分 ", x, y + 18 * 1.5)
+		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
+		this.context.font = "bold italic 24px Microsoft YaHei"
+		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		else this.context.fillStyle = "#009";
+		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		this.context.textAlign = "start"
+		this.context.fillStyle = "#000"
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
 		globalScore = 0;
@@ -193,9 +202,23 @@ class Game
 		// 绘制背景图
 		//this.drawBg()
 		// 绘制提示文字
-		this.context.font = '32px Microsoft YaHei'
-		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，下一关！', 445, 226)
+
+		let x = this.canvas.width / 2;
+		let y = this.canvas.height / 2 - 100;
+		this.context.textAlign = "center"
+		this.context.font = "32px Microsoft YaHei"
+		this.context.fillStyle = "#000"
+		this.context.fillText("CXK，下一关！", x, y);
+		this.context.font = "18px Microsoft YaHei"
+		this.context.fillText("当前得分 ", x, y + 18 * 1.5)
+		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
+		this.context.font = "bold italic 24px Microsoft YaHei"
+		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		else this.context.fillStyle = "#009";
+		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		this.context.textAlign = "start"
+		this.context.fillStyle = "#000"
 		// audio.pause();
 	}
 	// 游戏通关
@@ -209,13 +232,24 @@ class Game
 		// 绘制背景图
 		//this.drawBg()
 		// 绘制提示文字
-		this.context.font = 'bold 32px Microsoft YaHei'
-		this.context.fillStyle = '#000'
-		this.context.fillText('CXK，通关！', 445, 226);
-		this.context.fillText('总分 ', 445, 226 + 32 * 1.5)
-		this.context.font = 'bold 36px Microsoft YaHei'
-		this.context.fillStyle = '#00f'
-		this.context.fillText(globalScore, 445 + 70, 226 + 32 * 1.5 + 2)
+
+		let x = this.canvas.width / 2;
+		let y = this.canvas.height / 2 - 100;
+		this.context.textAlign = "center"
+		this.context.font = "32px Microsoft YaHei"
+		this.context.fillStyle = "#000"
+		this.context.fillText("CXK，通关！", x, y);
+		this.context.font = "18px Microsoft YaHei"
+		this.context.fillText("总得分 ", x, y + 18 * 1.5)
+		this.context.fillStyle = "#00f"
+		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
+		this.context.font = "bold italic 24px Microsoft YaHei"
+		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		else this.context.fillStyle = "#009";
+		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		this.context.textAlign = "start"
+		this.context.fillStyle = "#000"
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
 		globalScore = 0;
@@ -363,7 +397,7 @@ class Game
 			skille = g.main.skille,
 			skillr = g.main.skillr
 		// 设置键盘按下及松开相关注册函数
-		window.addEventListener('keydown', function (event)
+		window.addEventListener("keydown", function (event)
 		{
 			if (event.keyCode == 65)
 			{
@@ -376,7 +410,7 @@ class Game
 				g.keydowns[event.keyCode] = true
 			}
 		})
-		window.addEventListener('keyup', function (event)
+		window.addEventListener("keyup", function (event)
 		{
 			if (event.keyCode == 65)
 			{
@@ -390,7 +424,7 @@ class Game
 			}
 		})
 		// 设置鼠标点击
-		window.addEventListener('mousedown', function (event)
+		window.addEventListener("mousedown", function (event)
 		{
 			var clientWidth = document.body.clientWidth;
 			let y = event.clientY;
@@ -413,7 +447,7 @@ class Game
 				if (88 + 216 * 3 < x && x < 88 + 216 * 4) skillr.cast();
 			}
 		})
-		window.addEventListener('mouseup', function (event)
+		window.addEventListener("mouseup", function (event)
 		{
 			var clientWidth = document.body.clientWidth;
 			let y = event.clientY;
@@ -429,7 +463,7 @@ class Game
 				}
 			}
 		})
-		window.addEventListener('touchstart', function (event)
+		window.addEventListener("touchstart", function (event)
 		{
 			var clientWidth = document.body.clientWidth;
 			let y = event.touches[0].pageY;
@@ -453,7 +487,7 @@ class Game
 			}
 			event.preventDefault();
 		})
-		window.addEventListener('touchend', function (event)
+		window.addEventListener("touchend", function (event)
 		{
 			var clientWidth = document.body.clientWidth;
 			let y = event.touches[0].pageY;
@@ -474,7 +508,7 @@ class Game
 			g.actions[key] = callback
 		}
 		// 注册左方向键移动事件
-		g.registerAction('37', function ()
+		g.registerAction("37", function ()
 		{
 			// 判断游戏是否处于运行阶段
 			if (g.state === g.state_RUNNING && paddle.isLeftMove)
@@ -484,7 +518,7 @@ class Game
 			}
 		})
 		// 注册右方向键移动事件
-		g.registerAction('39', function ()
+		g.registerAction("39", function ()
 		{
 			// 判断游戏是否处于运行阶段
 			if (g.state === g.state_RUNNING && paddle.isRightMove)
@@ -534,7 +568,7 @@ class Game
 				g.state = g.state_STOP
 			}
 		}
-		window.addEventListener('keydown', function (event)
+		window.addEventListener("keydown", function (event)
 		{
 			switch (event.keyCode)
 			{

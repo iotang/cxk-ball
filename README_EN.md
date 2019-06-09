@@ -66,23 +66,23 @@ If encounter any problems, please try to refresh. If it can't solve problems, Pl
 
 If so, you can try to solve it yourself or take a screenshot through the Issues feedback, please provide information about the browser and the device, please follow the Issues specification.
 
-> __Q: Does this game infringe on the portrait rights of others__
+> **Q: Does this game infringe on the portrait rights of others**
 
 [Please see this note](about.md)
 
-> __Q: The map is displayed incorrectly or very strangely__
+> **Q: The map is displayed incorrectly or very strangely**
 
 Maybe Network Problem, try refreshing, or check the browser console for resource loading error messages.
 
-> __Q: I do not respond by pressing the left and right arrow keys__
+> **Q: I do not respond by pressing the left and right arrow keys**
 
 Please use KEY A and KEY D
 
-> __Q: I feel a little bit lag when I play this game__
+> **Q: I feel a little bit lag when I play this game**
 
 The performance of the device is too low, it is recommended to use a computer to get the best experience, and it is recommended to use modern browsers such as Firefox and Chrome.
 
-> __Q: I can't hear the sound__
+> **Q: I can't hear the sound**
 
 No music provided now. :(
 

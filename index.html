@@ -19,7 +19,8 @@
 	<script type="text/javascript">
 		// 百度统计代码
 		var _hmt = _hmt || [];
-		(function () {
+		(function ()
+		{
 			var hm = document.createElement("script");
 			hm.src = "https://hm.baidu.com/hm.js?5adedb455da362ba577abe2fd8e1095d";
 			var s = document.getElementsByTagName("script")[0];
@@ -137,37 +138,46 @@
 	canvas.height = canvas.clientWidth / 1000 * 563;
 	canvas.style.height = canvas.clientWidth / 1000 * 563 + "px";
 	cdiv.style.height = cdiv.clientWidth / 1000 * 563 + "px";
-	if (canvas.width < 936) {
+	if (canvas.width < 936)
+	{
 		canvas.width = 936;
 		canvas.height = 936 / 1000 * 563;
 		canvas.setAttribute("style", "");
 		canvas.style.zoom = (cdiv.clientWidth / 936);
-	} else {
+	} else
+	{
 
 	}
-	window.startGame = function () {
+	window.startGame = function ()
+	{
 		// $("#audio").attr("src", "media/jntm.m4a");
 		// audio.play();
 		window.cacheBallSpeed = parseInt($("#ballspeedset").val());
 		$("#ballspeedset").attr("disabled", "disabled");
 		_main.start();
-		setInterval(function () {
-			if (cxk_body == 1) {
+		setInterval(function ()
+		{
+			if (cxk_body == 1)
+			{
 				_main.paddle.image.src = "images/paddle2_" + move_way + ".png";
 				cxk_body = 2;
-			} else if (cxk_body == 2) {
+			} else if (cxk_body == 2)
+			{
 				_main.paddle.image.src = "images/paddle3_" + move_way + ".png";
 				cxk_body = 3;
-			} else if (cxk_body == 4) {
+			} else if (cxk_body == 4)
+			{
 				_main.paddle.image.src = "images/paddle4_" + move_way + ".png";
 				cxk_body = 3;
-			} else {
+			} else
+			{
 				_main.paddle.image.src = "images/paddle_" + move_way + ".png";
 				cxk_body = 1;
 			}
 		}, 150);
 
-		setInterval(function () {
+		setInterval(function ()
+		{
 			_main.ballshadow.y = 545;
 			_main.ballshadow.x = _main.ball.x;
 		}, 10);
