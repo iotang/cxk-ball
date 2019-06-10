@@ -153,8 +153,8 @@ class SkillQ extends Skill
 		}
 		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
 		ball.speedX = ball.speedX * per;
-		ball.speedX = Math.min(ball.speedX, 120);
-		ball.speedX = Math.max(ball.speedX, -120);
+		ball.speedX = Math.min(ball.speedX, 60);
+		ball.speedX = Math.max(ball.speedX, -60);
 		if (ball.speedY >= 0) ball.speedY = window.cacheBallSpeed;
 		else ball.speedY = -window.cacheBallSpeed;
 	}
@@ -215,16 +215,16 @@ class SkillE extends Skill
 		};
 		const { paddle, ball } = this.main;
 
-		let transdis = 120;
+		let transdis = 150;
 
 		if (move_way == 2)
 		{
-			if (ball.x < paddle.x) paddle.x = Math.max(ball.x, paddle.x - transdis);
+			if (ball.x < paddle.x && ball.y + 80 > paddle.y) paddle.x = Math.max(ball.x, paddle.x - transdis);
 			else paddle.x = Math.max(-30, paddle.x - transdis);
 		}
 		if (move_way == 1)
 		{
-			if (ball.x > paddle.x) paddle.x = Math.min(ball.x, paddle.x + transdis);
+			if (ball.x > paddle.x && ball.y + 80 > paddle.y) paddle.x = Math.min(ball.x, paddle.x + transdis);
 			else paddle.x = Math.min(paddle.x + transdis, canvas.width - 40);
 		};
 	}

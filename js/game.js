@@ -121,7 +121,7 @@ class Game
 
 		if (streak > 0)
 		{
-			let streaksize = Math.min(96, (Math.log(streak + 1) / Math.log(51)) * 60 + 36);
+			let streaksize = Math.min(96, (Math.log(streak + 1) / Math.log(51)) * (96 - 24) + 24);
 			this.context.font = "bold " + streaksize + "px Microsoft YaHei"
 			let colorr = 255 / 20 * streak;
 			let colorb = 255 / 0.6 - 255 / 0.6 / 50 * streak;
