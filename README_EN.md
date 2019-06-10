@@ -18,6 +18,8 @@ The mode which speed>=8, Please ikuns don't try it lightly, Otherwise you might 
 
 ![Lv10 Failure](https://s2.ax1x.com/2019/06/10/VyU3bq.gif)
 
+[Click me if the gif failed to show](https://s2.ax1x.com/2019/06/10/VyU3bq.gif)
+
 > Translate:
 >
 > *Top*
