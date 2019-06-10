@@ -89,7 +89,7 @@ class Ball
 				this.speedY *= -1
 				this.y = 0;
 			}
-			if (this.y > _main.ballshadow.y - (this.h - 16))
+			if (this.y > _main.ballshadow.y - this.h + 24)
 			{
 				// 游戏结束
 				game.state = game.state_GAMEOVER
@@ -199,7 +199,7 @@ class Score
 			x: _main.score_x,                               // x轴坐标
 			y: _main.score_y,                               // y轴坐标
 			text: "分数",                                  // 文本分数
-			textLv: "关卡",                                // 关卡文本
+			textLv: "关卡 ",                                // 关卡文本
 			score: 1,                                       // 每个砖块对应分数
 			allScore: 0,                                    // 总分
 			scorepunishment: 0,                             // 分数惩罚
@@ -207,7 +207,7 @@ class Score
 			blockListLen: _main.blockList.length,           // 砖块总数量
 			lv: _main.LV,                                   // 当前关卡
 
-			grandHighestScore: 125494,                       // 最高分
+			grandHighestScore: 156697,                       // 最高分
 		}
 		Object.assign(this, s)
 	}
@@ -279,8 +279,33 @@ class Scene
 
 		switch (lv)
 		{
-
-			case 1: // 正三角形
+			case 1:
+				let maps = [
+					" xxx  xx xx xx  x",
+					"xx xx xx xx xx xx",
+					"xx     xxx  xxx  ",
+					"xx    xx xx xx x ",
+					"xx xx xx xx xx xx",
+					" xxx  xx xx xx xx"
+				];
+				let xlen = 17, ylen = 6;
+				for (let i = 0; i < ylen; i++)
+				{
+					let arr = [];
+					x_start = (xNum_max - xlen) / 2 * 50;
+					for (let j = 0; j < xlen; j++)
+					{
+						if (maps[i][j] != ' ')
+							arr.push({
+								x: x_start + j * 50,
+								y: y_start + i * 20,
+								type: 1 + ((i + j) & 1)
+							});
+					}
+					this.blockList.push(arr);
+				}
+				break;
+			case 2: // 正三角形
 				var xNum = 16,                               // x轴砖块第一层数量
 					yNum = 9                                 // y轴砖块层数
 				// 循环y轴
@@ -324,7 +349,7 @@ class Scene
 					this.blockList.push(arr)
 				}
 				break
-			case 2:  // 倒三角形
+			case 3:  // 倒三角形
 				var xNum = 16,                              // x轴砖块第一层数量
 					yNum = 9                                // y轴砖块层数
 				// 循环y轴
@@ -368,7 +393,7 @@ class Scene
 					this.blockList.push(arr)
 				}
 				break
-			case 3: // 工字形
+			case 4: // 工字形
 				var xNum = 16,                              // x轴砖块第一层数量
 					yNum = 9                                // y轴砖块层数
 				// 循环y轴
@@ -412,7 +437,7 @@ class Scene
 					this.blockList.push(arr)
 				}
 				break
-			case 4: // 隔层
+			case 5: // 隔层
 				var xNum = 18,                               // x轴砖块第一层数量
 					yNum = 12                                 // y轴砖块层数
 				// 循环y轴

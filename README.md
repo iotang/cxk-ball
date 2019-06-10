@@ -8,13 +8,13 @@
 
 > ⚠ 警告 ⚠
 >
-> 本游戏有较高难度与技术性，请 ikun 们不要轻易尝试
+> 本游戏有高难度与高技术性，请 ikun 们不要轻易尝试
 
 最后，喜欢的话欢迎点个 Star，谢谢
 
 ## 游戏截图
 
-![游戏界面截图](https://s2.ax1x.com/2019/06/09/VrCgQx.png)
+![游戏界面截图](https://s2.ax1x.com/2019/06/10/VyU1rn.png)
 
 游戏有更多种难度可选择
 
@@ -22,7 +22,7 @@
 
 速度大于等于 8 的难度请勿轻易尝试，否则可能会疯掉（雾
 
-![等级 10 实况](https://s2.ax1x.com/2019/06/09/VrCfeO.gif)
+![等级 10 实况](https://s2.ax1x.com/2019/06/10/VyU3bq.gif)
 
 祝您游戏愉快
 
@@ -54,7 +54,7 @@ git clone https://github.com/iotang/cxk-ball
 
 > **问：移动端怎么搓技能啊**
 
-[查看图片](images/cxk_ball_control.png)
+![操作图示](images/cxk_ball_control.png)
 
 > **问：这个游戏是否侵犯他人肖像权**
 

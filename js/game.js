@@ -6,6 +6,11 @@ var storageScore = 0;
 // 创建储存总分的变量
 var globalScore = 0;
 // 游戏主要运行逻辑
+var streak = 0;
+var streakhitcnt = 0;
+var streaksum = 0;
+var lashit = 0;
+
 class Game
 {
 	constructor(main)
@@ -101,6 +106,33 @@ class Game
 		this.context.font = "italic bold 24px Microsoft YaHei"
 		this.context.fillText(obj.grandHighestScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36 - 24)
 
+		if (streakhitcnt > 0)
+		{
+			this.context.fillStyle = "#000";
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText(((streaksum + streak) / (streakhitcnt + (streak != 0))).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
+		}
+
+		if (streak > 0)
+		{
+			let streaksize = Math.min(96, (Math.log(streak + 1) / Math.log(51)) * 60 + 36);
+			this.context.font = "bold " + streaksize + "px Microsoft YaHei"
+			let colorr = 255 / 20 * streak;
+			let colorb = 255 / 0.6 - 255 / 0.6 / 50 * streak;
+			colorr = Math.floor(Math.max(Math.min(colorr, 255), 0));
+			colorb = Math.floor(Math.max(Math.min(colorb, 255), 0));
+			this.context.fillStyle = "rgb(" + colorr + ", 0, " + colorb + ")";
+			this.context.fillText(streak, this.canvas.width - 8 - 24 * 2, streaksize);
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillStyle = "#000";
+			this.context.fillText("连击", this.canvas.width - 8, 10 + 24);
+		}
 		this.context.textAlign = "start"
 
 		this.context.font = "bold 24px Microsoft YaHei"
@@ -164,6 +196,9 @@ class Game
 	gameOver()
 	{
 		globalScore = globalScore + storageScore;
+		streakhitcnt++;
+		streaksum += streak;
+		streak = 0;
 		// 清除定时器
 		clearInterval(this.timer)
 		// 清除画布
@@ -185,16 +220,35 @@ class Game
 		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		if (streakhitcnt > 0)
+		{
+			this.context.textAlign = "end"
+			this.context.fillStyle = "#000";
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
+		}
 		this.context.textAlign = "start"
 		this.context.fillStyle = "#000"
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
+		streak = 0;
+		streakhitcnt = 0;
+		streaksum = 0;
 		globalScore = 0;
 	}
 	// 游戏晋级
 	goodGame()
 	{
 		globalScore = globalScore + storageScore;
+		streakhitcnt++;
+		streaksum += streak;
+		streak = 0;
 		// 清除定时器
 		clearInterval(this.timer)
 		// 清除画布
@@ -217,6 +271,19 @@ class Game
 		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		if (streakhitcnt > 0)
+		{
+			this.context.textAlign = "end"
+			this.context.fillStyle = "#000";
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
+		}
 		this.context.textAlign = "start"
 		this.context.fillStyle = "#000"
 		// audio.pause();
@@ -225,6 +292,9 @@ class Game
 	finalGame()
 	{
 		globalScore = globalScore + storageScore;
+		streakhitcnt++;
+		streaksum += streak;
+		streak = 0;
 		// 清除定时器
 		clearInterval(this.timer)
 		// 清除画布
@@ -248,10 +318,26 @@ class Game
 		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
+		if (streakhitcnt > 0)
+		{
+			this.context.textAlign = "end"
+			this.context.fillStyle = "#000";
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
+			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
+			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
+		}
 		this.context.textAlign = "start"
 		this.context.fillStyle = "#000"
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
+		streak = 0;
+		streakhitcnt = 0;
+		streaksum = 0;
 		globalScore = 0;
 	}
 	// 注册事件
@@ -266,6 +352,10 @@ class Game
 		// 小球碰撞挡板检测
 		if (p.collide(b))
 		{
+			streaksum += streak;
+			streak = 0;
+			if (lashit + 200 < Date.now()) streakhitcnt++;
+			lashit = Date.now();
 			// 当小球运动方向趋向挡板中心时，Y轴速度取反，反之则不变
 			cxk_body = 4;
 			if (Math.abs(b.y + b.h / 2 - p.y + p.h / 2) > Math.abs(b.y + b.h / 2 + b.speedY - p.y + p.h / 2))
@@ -284,6 +374,7 @@ class Game
 		{
 			if (item.collide(b))
 			{ // 小球、砖块已碰撞
+				streak++;
 				if (!item.alive)
 				{ // 砖块血量为0时，进行移除
 					arr.splice(i, 1)
@@ -360,6 +451,7 @@ class Game
 					g.state = g.state_UPDATE
 					// 挑战成功，渲染通关场景
 					g.finalGame()
+					main.LV = 0;
 				}
 				else
 				{ // 其余关卡通关
@@ -641,20 +733,20 @@ class Game
 						$("#ballspeedset").attr("disabled", "disabled");
 					}
 					break
-					/*
-				case 77:
-					if ($("#audio").attr("src") == "media/jntm.m4a")
-					{
-						audio.src = "about:blank";
-						audio.pause();
-					}
-					else
-					{
-						audio.src = "media/jntm.m4a";
-						audio.play();
-					}
-					break
-					*/
+				/*
+			case 77:
+				if ($("#audio").attr("src") == "media/jntm.m4a")
+				{
+					audio.src = "about:blank";
+					audio.pause();
+				}
+				else
+				{
+					audio.src = "media/jntm.m4a";
+					audio.play();
+				}
+				break
+				*/
 				// P 键暂停游戏事件
 				case 80:
 					if (g.state !== g.state_UPDATE && g.state !== g.state_GAMEOVER)

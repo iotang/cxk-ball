@@ -184,6 +184,7 @@ class SkillW extends Skill
 		this.casting = setInterval(() =>
 		{
 			ball.x = paddle.x + paddle.w / 2;
+			ball.speedX = 0;
 		}, 1000 / 60);
 		setTimeout(() =>
 		{
