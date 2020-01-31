@@ -5,6 +5,9 @@
 var storageScore = 0;
 // 创建储存总分的变量
 var globalScore = 0;
+
+var hasReachedHighScore = 0;
+
 // 游戏主要运行逻辑
 var streak = 0;
 var streakhitcnt = 0;
@@ -81,61 +84,61 @@ class Game
 	{
 		this.context.textAlign = "end"
 
-		this.context.font = "24px Microsoft YaHei"
+		this.context.font = "24px sans-serif"
 		this.context.fillStyle = "#000"
 		// 绘制分数
 		this.context.fillText(obj.text, this.canvas.width - 8, this.canvas.height - 10 - 72)
 
-		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.font = "bold 72px sans-serif"
 		this.context.fillStyle = "#000"
 		this.context.fillText(obj.allScore, this.canvas.width - 8, this.canvas.height - 10)
 
-		let isReachedHighScore = (obj.grandHighestScore <= globalScore + obj.allScore);
+		hasReachedHighScore |= (obj.grandHighestScore <= globalScore + obj.allScore);
 
-		if (isReachedHighScore) this.context.fillStyle = "#090";
+		if (hasReachedHighScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#666";
-		this.context.font = "italic 18px Microsoft YaHei"
+		this.context.font = "italic 18px sans-serif"
 		this.context.fillText("累计", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36)
-		this.context.font = "italic bold 24px Microsoft YaHei"
+		this.context.font = "italic bold 24px sans-serif"
 		this.context.fillText(globalScore + obj.allScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36)
 
-		if (isReachedHighScore) this.context.fillStyle = "#090";
+		if (hasReachedHighScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
-		this.context.font = "italic 18px Microsoft YaHei"
+		this.context.font = "italic 18px sans-serif"
 		this.context.fillText("最高", this.canvas.width - 8, this.canvas.height - 10 - 72 - 36 - 24)
-		this.context.font = "italic bold 24px Microsoft YaHei"
+		this.context.font = "italic bold 24px sans-serif"
 		this.context.fillText(obj.grandHighestScore, this.canvas.width - 8 - 36 - 16, this.canvas.height - 10 - 72 - 36 - 24)
 
 		if (streakhitcnt > 0)
 		{
 			this.context.fillStyle = "#000";
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText(((streaksum + streak) / (streakhitcnt + (streak != 0))).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
 		}
 
 		if (streak > 0)
 		{
 			let streaksize = Math.min(96, (Math.log(streak + 1) / Math.log(51)) * (96 - 24) + 24);
-			this.context.font = "bold " + streaksize + "px Microsoft YaHei"
+			this.context.font = "bold " + streaksize + "px sans-serif"
 			let colorr = 255 / 20 * streak;
 			let colorb = 255 / 0.6 - 255 / 0.6 / 50 * streak;
 			colorr = Math.floor(Math.max(Math.min(colorr, 255), 0));
 			colorb = Math.floor(Math.max(Math.min(colorb, 255), 0));
 			this.context.fillStyle = "rgb(" + colorr + ", 0, " + colorb + ")";
 			this.context.fillText(streak, this.canvas.width - 8 - 24 * 2, streaksize);
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillStyle = "#000";
 			this.context.fillText("连击", this.canvas.width - 8, 10 + 24);
 		}
 		this.context.textAlign = "start"
 
-		this.context.font = "bold 24px Microsoft YaHei"
+		this.context.font = "bold 24px sans-serif"
 		this.context.fillStyle = "#000"
 		this.context.fillText(obj.textLv + obj.lv, obj.x, obj.y)
 
@@ -153,40 +156,40 @@ class Game
 
 		if (isCDOK && isScoreOK) this.context.fillStyle = "#99f";
 		else this.context.fillStyle = "#ccc";
-		this.context.font = "bold 48px Microsoft YaHei"
+		this.context.font = "bold 48px sans-serif"
 		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216 + 3, this.canvas.height - 36 + 3)
 
 		if (isCDOK && isScoreOK) this.context.fillStyle = "#000";
 		else this.context.fillStyle = "#999";
-		this.context.font = "bold 48px Microsoft YaHei"
+		this.context.font = "bold 48px sans-serif"
 		this.context.fillText(String.fromCharCode(obj.keyCode), num * 216, this.canvas.height - 36)
-		this.context.font = "24px Microsoft YaHei"
+		this.context.font = "24px sans-serif"
 		this.context.fillText(obj.name, num * 216 + 48, this.canvas.height - 36)
 
 		if (!isCDOK)
 		{
-			this.context.font = "24px Microsoft YaHei"
+			this.context.font = "24px sans-serif"
 			this.context.fillStyle = "#a00"
 			this.context.fillText("CD " + distan + "s", num * 216, this.canvas.height - 36 + 24 * 1.25)
 		}
 		else
 		{
-			this.context.font = "bold 24px Microsoft YaHei"
+			this.context.font = "bold 24px sans-serif"
 			this.context.fillStyle = "#0a0"
 			this.context.fillText("Ready", num * 216, this.canvas.height - 36 + 24 * 1.25)
-			this.context.font = "18px Microsoft YaHei"
+			this.context.font = "18px sans-serif"
 			this.context.fillStyle = "#000"
 			this.context.fillText("(" + obj.cd + ")", num * 216 + 80, this.canvas.height - 36 + 24 * 1.25)
 		}
 		if (!isScoreOK)
 		{
-			this.context.font = "bold 24px Microsoft YaHei"
+			this.context.font = "bold 24px sans-serif"
 			this.context.fillStyle = "#a00"
 			this.context.fillText(obj.delta, num * 216 + 128, this.canvas.height - 36 + 24 * 1.25)
 		}
 		else
 		{
-			this.context.font = "24px Microsoft YaHei"
+			this.context.font = "24px sans-serif"
 			this.context.fillStyle = "#00a"
 			this.context.fillText(obj.delta, num * 216 + 128, this.canvas.height - 36 + 24 * 1.25)
 		}
@@ -209,28 +212,28 @@ class Game
 		let x = this.canvas.width / 2;
 		let y = this.canvas.height / 2 - 100;
 		this.context.textAlign = "center"
-		this.context.font = "32px Microsoft YaHei"
+		this.context.font = "32px sans-serif"
 		this.context.fillStyle = "#000"
 		this.context.fillText("CXK，你球掉了！", x, y);
-		this.context.font = "18px Microsoft YaHei"
+		this.context.font = "18px sans-serif"
 		this.context.fillText("总得分 ", x, y + 18 * 1.5)
-		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.font = "bold 72px sans-serif"
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
-		this.context.font = "bold italic 24px Microsoft YaHei"
-		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		this.context.font = "bold italic 24px sans-serif"
+		if (hasReachedHighScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
 		if (streakhitcnt > 0)
 		{
 			this.context.textAlign = "end"
 			this.context.fillStyle = "#000";
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
 		}
 		this.context.textAlign = "start"
@@ -241,6 +244,7 @@ class Game
 		streakhitcnt = 0;
 		streaksum = 0;
 		globalScore = 0;
+		hasReachedHighScore = 0;
 	}
 	// 游戏晋级
 	goodGame()
@@ -260,28 +264,28 @@ class Game
 		let x = this.canvas.width / 2;
 		let y = this.canvas.height / 2 - 100;
 		this.context.textAlign = "center"
-		this.context.font = "32px Microsoft YaHei"
+		this.context.font = "32px sans-serif"
 		this.context.fillStyle = "#000"
 		this.context.fillText("CXK，下一关！", x, y);
-		this.context.font = "18px Microsoft YaHei"
+		this.context.font = "18px sans-serif"
 		this.context.fillText("当前得分 ", x, y + 18 * 1.5)
-		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.font = "bold 72px sans-serif"
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
-		this.context.font = "bold italic 24px Microsoft YaHei"
-		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		this.context.font = "bold italic 24px sans-serif"
+		if (hasReachedHighScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
 		if (streakhitcnt > 0)
 		{
 			this.context.textAlign = "end"
 			this.context.fillStyle = "#000";
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
 		}
 		this.context.textAlign = "start"
@@ -306,29 +310,29 @@ class Game
 		let x = this.canvas.width / 2;
 		let y = this.canvas.height / 2 - 100;
 		this.context.textAlign = "center"
-		this.context.font = "32px Microsoft YaHei"
+		this.context.font = "32px sans-serif"
 		this.context.fillStyle = "#000"
 		this.context.fillText("CXK，通关！", x, y);
-		this.context.font = "18px Microsoft YaHei"
+		this.context.font = "18px sans-serif"
 		this.context.fillText("总得分 ", x, y + 18 * 1.5)
 		this.context.fillStyle = "#00f"
-		this.context.font = "bold 72px Microsoft YaHei"
+		this.context.font = "bold 72px sans-serif"
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1)
-		this.context.font = "bold italic 24px Microsoft YaHei"
-		if (this.main.score.grandHighestScore == globalScore) this.context.fillStyle = "#090";
+		this.context.font = "bold italic 24px sans-serif"
+		if (hasReachedHighScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#009";
 		this.context.fillText("最高 " + this.main.score.grandHighestScore, x, y + 18 * 1.5 + 72 * 1 + 24 * 1.2);
 		if (streakhitcnt > 0)
 		{
 			this.context.textAlign = "end"
 			this.context.fillStyle = "#000";
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("接球次数", this.canvas.width - 8, this.canvas.height / 2)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText(streakhitcnt, this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2)
-			this.context.font = "italic 18px Microsoft YaHei"
+			this.context.font = "italic 18px sans-serif"
 			this.context.fillText("平均打点", this.canvas.width - 8, this.canvas.height / 2 - 24)
-			this.context.font = "italic bold 24px Microsoft YaHei"
+			this.context.font = "italic bold 24px sans-serif"
 			this.context.fillText((streaksum / streakhitcnt).toFixed(4), this.canvas.width - 8 - 18 * 4 - 16, this.canvas.height / 2 - 24)
 		}
 		this.context.textAlign = "start"
@@ -339,6 +343,7 @@ class Game
 		streakhitcnt = 0;
 		streaksum = 0;
 		globalScore = 0;
+		hasReachedHighScore = 0;
 	}
 	// 注册事件
 	registerAction(key, callback)
