@@ -5,58 +5,43 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=11">
-	<meta name="description" content="这是一款 HTML5 开发的 CXK 打篮球小游戏，无聊的时候玩玩吧！">
-	<meta name="keywords" content="CXK,打篮球,游戏,弹球,篮球,HTML5,开源,caixukun,CXK出来打球,你打篮球像CXK">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
 		crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css?s=2">
-	<title>CXK 打篮球 - CXK，出来打球！CXK游戏_你打游戏像CXK_篮球打CXK</title>
+	<title>亦可顶 EVA</title>
 	<!--<link rel="stylesheet" href="css/common.css">-->
 	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"
 		crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		// 百度统计代码
-		var _hmt = _hmt || [];
-		(function ()
-		{
-			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?5adedb455da362ba577abe2fd8e1095d";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
 </head>
 
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2>CXK 打篮球</h2>
-				<p>CXK，出来打球！(unstable)</p>
+				<h2>亦可顶 EVA</h2>
+				<p>老子叫亦可</p>
 				<hr>
 				<center>
 					<p>
 						<div class="input-group">
 							<span class="input-group-addon">难度</span>
 							<select class="form-control" id="ballspeedset">
-								<option value="1">极简单（Speed 1）</option>
-								<option value="2">简单（Speed 2）</option>
-								<option value="3">普通（Speed 3）</option>
-								<option value="5">进阶（Speed 5）</option>
-								<option value="7" selected>困难（Speed 7）</option>
-								<option value="8">死亡细胞（Speed 8）</option>
-								<option value="9">茶杯头（Speed 9）</option>
-								<option value="10">空洞骑士（Speed 10）</option>
-								<option value="11">超级马里奥世界（Speed 11）</option>
-								<option value="12">黑暗之魂（Speed 12）</option>
-								<option value="13">只狼（Speed 13）</option>
-								<option value="14">超级马里奥兄弟（Speed 14）</option>
-								<option value="15">马里奥制造 - 困难（Speed 15）</option>
-								<option value="16">蔚蓝（Speed 16）</option>
-								<option value="17">马里奥制造 - 极难（Speed 17）</option>
-								<option value="18">I Wanna be the Guy（Speed 18）</option>
+								<option value="5">非常简单（Speed 5）</option>
+								<option value="6">简单（Speed 6）</option>
+								<option value="7">一般（Speed 7）</option>
+								<option value="8">困难（Speed 8）</option>
+								<option value="9">极难（Speed 9）</option>
+								<option value="10">莱希拉姆（Speed 10）</option>
+								<option value="11">凤王（Speed 11）</option>
+								<option value="12">超梦（Speed 12）</option>
+								<option value="13">酋雷姆（Speed 13）</option>
+								<option value="14">烈空坐（Speed 14）</option>
+								<option value="15">骑拉帝纳（Speed 15）</option>
+								<option value="16">无极汰那（Speed 16）</option>
+								<option value="17">奈克洛兹玛（Speed 17）</option>
+								<option value="18">阿尔宙斯（Speed 18）</option>
 							</select>
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-danger" onclick="window.startGame()">开始游戏</button>
@@ -71,49 +56,17 @@
 				</center>
 				<hr>
 				<h3>游戏说明</h3>
-				<p>方向键：控制 CXK 左右移动。</p>
-				<p>回车：让 CXK 发球。</p>
+				<p>方向键：控制亦可左右移动。</p>
+				<p>回车：让亦可发球。</p>
 				<p>P：暂停游戏。</p>
 				<p>N：通关后进入下一关。</p>
-				<p>技能[Q] 意念控球，控制球转向一次，朝向离球最近的一个砖块。</p>
-				<p>技能[W] 虚鲲鬼步，5 秒内让篮球跟着 CXK。</p>
-				<p>技能[E] 闪烁之鲲，向当前朝向闪烁一小段距离。如果离球足够近，那么会直接闪烁到球的下面。</p>
-				<p>技能[R] 爱坤之祝，其它三个技能的 CD 和消耗大幅降低，持续 10 秒。</p>
-				<p>如果出现显示不正常的情况请截图并通过 Issues 反馈。</p>
+				<p>技能[Q] 磁力牵引，控制球转向一次，朝向离球最近的一个砖块。</p>
+				<p>技能[W] 轨迹干扰，5 秒内让篮球跟着亦可。</p>
+				<p>技能[E] 快速迭代，向当前朝向立刻移动一小段距离。</p>
+				<p>技能[R] 超频模式，其它三个技能的 CD 和消耗大幅降低，持续 10 秒。</p>
 				<p>难度排名仅供娱乐</p>
-				<details>
-					<summary style="font-size: 18px; cursor: pointer;">移动端点此查看操作</summary>
-					<img src="images/cxk_ball_control.png" width="100%">
-				</details>
 				<hr>
-				<h3>更新记录</h3>
-				<details>
-					<summary style="cursor: pointer;">点击查看更新内容</summary>
-					<div style="margin-top: 8px;">
-						<p>[分支]1.6.8：增加连击计数，关卡增至 5 关</p>
-						<p>[分支]1.6.7：修正移动端体验，优化性能</p>
-						<p>[分支]1.6.6：修正移动端体验，增加技能 R，CXK 技能已经凑齐</p>
-						<p>[分支]1.6.5：修正有关球的移动 bug，更改技能W</p>
-						<p>[分支]1.6.4：修正技能Q的速度 bug，增加最高分功能</p>
-						<p>[分支]1.6.3：修复技能连击 bug，增加技能 E</p>
-						<p>[分支]1.6.2：显示技能 HUD</p>
-						<p>[分支]1.6.1：修复分数不扣除问题，添加更多难度，修正分值增长公式</p>
-						<p>1.6：增加接球动作，修复球落地判定问题</p>
-						<p>1.5：增加更多的特效</p>
-						<p>1.4：增加难度设定功能</p>
-						<p>1.3：修复移动端操作问题</p>
-						<p>1.2：修复图片显示问题</p>
-						<p>1.1：将显示方式改为 background</p>
-						<p>1.0：CXK 打篮球发布</p>
-					</div>
-				</details>
 				<hr>
-				<p>地址：<a href="https://github.com/iotang/cxk-ball" target="_blank">https://github.com/iotang/cxk-ball</a>
-				</p>
-				<p>来自 Github 开源项目：<a href="https://github.com/kasuganosoras/cxk-ball"
-						target="_blank">https://github.com/kasuganosoras/cxk-ball</a>（原作者：<a
-						href="https://github.com/yangyunhe369" target="_blank">yangyunhe369</a>）</p>
-				<p>喜欢的话欢迎点个 Star~</p>
 			</div>
 		</div>
 	</div>
@@ -129,8 +82,6 @@
 <img src="images/paddle3_2.png" style="width: 0px;height: 0px;" />
 <img src="images/paddle4_1.png" style="width: 0px;height: 0px;" />
 <img src="images/paddle4_2.png" style="width: 0px;height: 0px;" />
-<!-- 背景音乐（已删除） -->
-<!-- <audio src="" style="width: 0px;height: 0px;border: 0px;" id="audio" loop="-1"></audio> -->
 <script src="js/common.js?s=4"></script>
 <script src="js/scene.js?s=4"></script>
 <script src="js/skills.js?s=4"></script>
@@ -159,8 +110,6 @@
 	}
 	window.startGame = function ()
 	{
-		// $("#audio").attr("src", "media/jntm.m4a");
-		// audio.play();
 		window.cacheBallSpeed = parseInt($("#ballspeedset").val());
 		$("#ballspeedset").attr("disabled", "disabled");
 		_main.start();

@@ -64,7 +64,7 @@ class Skill
 		const keyName = typeof this.keyCode === "number" ? String.fromCharCode(this.keyCode) : this.keyCode.map(key => String.fromCharCode(key)).join("/");
 
 		this.delta = Math.ceil(this.cost * Math.pow(window.cacheBallSpeed, 2.9));
-		console.log(`CXK 已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${this.delta}`);
+		console.log(`亦可已加载技能：[${keyName}]${this.name}，冷却 ${this.cd}，消耗 ${this.delta}`);
 		this.lastCastTime = 0;
 	}
 
@@ -85,7 +85,7 @@ class Skill
 		if (this.main.score.allScore < this.delta)
 		{
 			this.isRunning = 0;
-			throw new Error(`积分不足 (${this.main.score.allScore} / ${this.delta})`);
+			throw new Error(`分数不足 (${this.main.score.allScore} / ${this.delta})`);
 		}
 
 		this.lastCastTime = nowtime; // 更新上次释放时间
@@ -93,7 +93,7 @@ class Skill
 		this.main.score.computeScore();
 		// TODO 显示释放技能的特效
 
-		console.log(`CXK 消耗了 ${this.delta} 积分发动了技能 ${this.name}！\n${this.desc}`);
+		console.log(`亦可消耗了 ${this.delta} 积分发动了技能 ${this.name}！\n${this.desc}`);
 
 		return 0;
 	}
@@ -106,7 +106,7 @@ class SkillQ extends Skill
 		super(main,
 			"意念控球",
 			"",
-			"CXK 使用意念控制球转向一次，朝向离球最近的一个砖块",
+			"控制球转向一次，朝向离球最近的一个砖块",
 			3,
 			4,
 			"Q");
@@ -153,8 +153,8 @@ class SkillQ extends Skill
 		}
 		let per = Math.abs(window.cacheBallSpeed / ball.speedY);
 		ball.speedX = ball.speedX * per;
-		ball.speedX = Math.min(ball.speedX, 60);
-		ball.speedX = Math.max(ball.speedX, -60);
+		ball.speedX = Math.min(ball.speedX, 18);
+		ball.speedX = Math.max(ball.speedX, -18);
 		if (ball.speedY >= 0) ball.speedY = window.cacheBallSpeed;
 		else ball.speedY = -window.cacheBallSpeed;
 	}
@@ -165,9 +165,9 @@ class SkillW extends Skill
 	constructor(main)
 	{
 		super(main,
-			"虚鲲鬼步",
+			"轨迹干扰",
 			"",
-			"CXK 发动在美国校队时领悟的绝技，5 秒内让篮球跟着 CXK",
+			"5 秒内让篮球跟着亦可",
 			15,
 			20,
 			"W");
@@ -199,9 +199,9 @@ class SkillE extends Skill
 	constructor(main)
 	{
 		super(main,
-			"闪烁之鲲",
+			"快速迭代",
 			"",
-			"CXK 利用自己长期跳舞的经验，向当前方向闪烁一小段距离",
+			"向当前朝向立刻移动一小段距离",
 			0.2,
 			1.25,
 			"E");
@@ -226,7 +226,7 @@ class SkillE extends Skill
 		{
 			if (ball.x > paddle.x && ball.y + 80 > paddle.y) paddle.x = Math.min(ball.x, paddle.x + transdis);
 			else paddle.x = Math.min(paddle.x + transdis, canvas.width - 40);
-		};
+		}
 	}
 }
 
@@ -235,13 +235,13 @@ class SkillR extends Skill
 	constructor(main)
 	{
 		super(main,
-			"爱坤之祝",
+			"超频模式",
 			"",
-			"ikun 们对 CXK 施加祝福，其它技能的 CD 和消耗降低了",
+			"其它三个技能的 CD 和消耗大幅降低，持续 10 秒",
 			30,
 			6,
 			"R");
-		this.duration = 10;  // 持续10秒
+		this.duration = 10;  // 持续 10 秒
 	}
 
 	cast()
