@@ -25,6 +25,8 @@ let _main = {
 	skille: null, // e技能
 	skillr: null, // r技能
 
+	turboMode: 0,
+
 	start: function () {
 		// 游戏启动函数
 		let self = this;

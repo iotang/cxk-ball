@@ -84,6 +84,15 @@ class Game {
 	}
 	// 绘制计数板
 	drawText(obj) {
+
+		if (this.main.turboMode) {
+			this.context.textAlign = "center";
+			this.context.font = "bold 24px sans-serif";
+			this.context.fillStyle = "#F00";
+			// 绘制分数
+			this.context.fillText("超频模式", this.canvas.width / 2, 24);
+		}
+
 		this.context.textAlign = "end";
 
 		this.context.font = "24px sans-serif";
@@ -180,15 +189,25 @@ class Game {
 			this.context.fillText("连击", this.canvas.width - 8, 10 + 24);
 
 			let totalStreakBonusScore = 0;
-			for (let i = 1; i <= streak; i ++)
-				totalStreakBonusScore += Math.ceil(obj.score * 0.02 * Math.pow(i - 1, 1.1));
+			for (let i = 1; i <= streak; i++)
+				totalStreakBonusScore += Math.ceil(
+					obj.score * 0.10 * Math.pow(i - 1, 1.1)
+				);
 			this.context.font = "bold 24px sans-serif";
 			this.context.fillStyle = "rgb(" + colorr + ", 0, " + colorb + ")";
-			this.context.fillText(totalStreakBonusScore, this.canvas.width - 8 - 24 * 3, 10 + 24 + streaksize);
+			this.context.fillText(
+				totalStreakBonusScore,
+				this.canvas.width - 8 - 24 * 3,
+				10 + 24 + streaksize
+			);
 
 			this.context.font = "italic bold 24px sans-serif";
 			this.context.fillStyle = "#000";
-			this.context.fillText("连击分", this.canvas.width - 8, 10 + 24 + streaksize);
+			this.context.fillText(
+				"连击分",
+				this.canvas.width - 8,
+				10 + 24 + streaksize
+			);
 		}
 		this.context.textAlign = "start";
 
@@ -337,6 +356,8 @@ class Game {
 		streaksum = 0;
 		globalScore = 0;
 		hasReachedHighScore = 0;
+		this.main.LV = 1;
+		
 	}
 	// 游戏晋级
 	goodGame() {
@@ -505,25 +526,32 @@ class Game {
 			if (item.collide(b)) {
 				// 小球、砖块已碰撞
 				streak++;
-				score.scoreBonus += Math.ceil(score.score * 0.02 * Math.pow(streak - 1, 1.1));
+				score.scoreBonus += Math.ceil(
+					score.score * 0.10 * Math.pow(streak - 1, 1.1)
+				);
 				if (!item.alive) {
 					// 砖块血量为0时，进行移除
 					arr.splice(i, 1);
 				}
 				// 当小球运动方向趋向砖块中心时，速度取反，反之则不变
-				if ((b.y < item.y && b.speedY < 0) || (b.y > item.y && b.speedY > 0)) {
-					if (!item.collideBlockHorn(b)) {
-						b.speedY *= -1;
+				if (!g.main.turboMode) {
+					if (
+						(b.y < item.y && b.speedY < 0) ||
+						(b.y > item.y && b.speedY > 0)
+					) {
+						if (!item.collideBlockHorn(b)) {
+							b.speedY *= -1;
+						} else {
+							// 当小球撞击砖块四角时，Y轴速度不变
+							b.speedY *= 1;
+						}
 					} else {
-						// 当小球撞击砖块四角时，Y轴速度不变
 						b.speedY *= 1;
 					}
-				} else {
-					b.speedY *= 1;
-				}
-				// 当小球撞击砖块四角时，X轴速度取反
-				if (item.collideBlockHorn(b)) {
-					b.speedX *= -1;
+					// 当小球撞击砖块四角时，X轴速度取反
+					if (item.collideBlockHorn(b)) {
+						b.speedX *= -1;
+					}
 				}
 				// 计算分数
 				score.computeScore();
