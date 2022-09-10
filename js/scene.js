@@ -185,7 +185,8 @@ class Score {
 			blockListLen: _main.blockList.length, // 砖块总数量
 			lv: _main.LV, // 当前关卡
 
-			grandHighestScore: 1613916, // 最高分
+			grandHighestScore: 13877410, // 最高分
+			grandHighestScoreOwner: "空之探险队的 Kate"
 		};
 		Object.assign(this, s);
 	}
@@ -195,11 +196,6 @@ class Score {
 		this.score = Math.ceil(Math.pow(window.cacheBallSpeed, 3));
 		num = this.blockListLen - this.blockList.length;
 		this.allScore = this.score * num - this.scorepunishment + this.scoreBonus;
-
-		this.grandHighestScore = Math.max(
-			this.grandHighestScore,
-			this.allScore + globalScore
-		);
 	}
 
 	refresh() {

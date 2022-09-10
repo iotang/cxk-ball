@@ -6,8 +6,6 @@ var storageScore = 0;
 // 创建储存总分的变量
 var globalScore = 0;
 
-var hasReachedHighScore = 0;
-
 // 游戏主要运行逻辑
 var streak = 0;
 var streakhitcnt = 0;
@@ -112,9 +110,7 @@ class Game {
 			this.canvas.height - 10
 		);
 
-		hasReachedHighScore |= obj.grandHighestScore <= globalScore + obj.allScore;
-
-		if (hasReachedHighScore) this.context.fillStyle = "#090";
+		if (obj.grandHighestScore < globalScore + obj.allScore) this.context.fillStyle = "#090";
 		else this.context.fillStyle = "#666";
 		this.context.font = "italic 18px sans-serif";
 		this.context.fillText(
@@ -129,13 +125,17 @@ class Game {
 			this.canvas.height - 10 - 72 - 36
 		);
 
-		if (hasReachedHighScore) this.context.fillStyle = "#090";
-		else this.context.fillStyle = "#009";
+		this.context.fillStyle = "#009";
 		this.context.font = "italic 18px sans-serif";
 		this.context.fillText(
 			"最高",
 			this.canvas.width - 8,
 			this.canvas.height - 10 - 72 - 36 - 24
+		);
+		this.context.fillText(
+			obj.grandHighestScoreOwner,
+			this.canvas.width - 8,
+			this.canvas.height - 10 - 72 - 36 - 24 - 24
 		);
 		this.context.font = "italic bold 24px sans-serif";
 		this.context.fillText(
@@ -312,8 +312,7 @@ class Game {
 		this.context.font = "bold 72px sans-serif";
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1);
 		this.context.font = "bold italic 24px sans-serif";
-		if (hasReachedHighScore) this.context.fillStyle = "#090";
-		else this.context.fillStyle = "#009";
+		this.context.fillStyle = "#009";
 		this.context.fillText(
 			"最高 " + this.main.score.grandHighestScore,
 			x,
@@ -347,15 +346,21 @@ class Game {
 				this.canvas.height / 2 - 24
 			);
 		}
+
 		this.context.textAlign = "start";
 		this.context.fillStyle = "#000";
 		$("#ballspeedset").removeAttr("disabled");
+		
+		if (this.main.score.grandHighestScore < globalScore) {
+			this.main.score.grandHighestScore = globalScore;
+			let newName = prompt("你是新的最高分！请输入你的名字！");
+			this.main.score.grandHighestScoreOwner = newName;
+		}
 		// audio.pause();
 		streak = 0;
 		streakhitcnt = 0;
 		streaksum = 0;
 		globalScore = 0;
-		hasReachedHighScore = 0;
 		this.main.LV = 1;
 		
 	}
@@ -384,8 +389,7 @@ class Game {
 		this.context.font = "bold 72px sans-serif";
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1);
 		this.context.font = "bold italic 24px sans-serif";
-		if (hasReachedHighScore) this.context.fillStyle = "#090";
-		else this.context.fillStyle = "#009";
+		this.context.fillStyle = "#009";
 		this.context.fillText(
 			"最高 " + this.main.score.grandHighestScore,
 			x,
@@ -449,8 +453,7 @@ class Game {
 		this.context.font = "bold 72px sans-serif";
 		this.context.fillText(globalScore, x, y + 18 * 1.5 + 72 * 1);
 		this.context.font = "bold italic 24px sans-serif";
-		if (hasReachedHighScore) this.context.fillStyle = "#090";
-		else this.context.fillStyle = "#009";
+		this.context.fillStyle = "#009";
 		this.context.fillText(
 			"最高 " + this.main.score.grandHighestScore,
 			x,
@@ -488,11 +491,15 @@ class Game {
 		this.context.fillStyle = "#000";
 		$("#ballspeedset").removeAttr("disabled");
 		// audio.pause();
+		if (this.main.score.grandHighestScore < globalScore) {
+			this.main.score.grandHighestScore = globalScore;
+			let newName = prompt("你是新的最高分！请输入你的名字！");
+			this.main.score.grandHighestScoreOwner = newName;
+		}
 		streak = 0;
 		streakhitcnt = 0;
 		streaksum = 0;
 		globalScore = 0;
-		hasReachedHighScore = 0;
 	}
 	// 注册事件
 	registerAction(key, callback) {
